@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoạt Động & Sự Kiện - THPT DTNT Ngọc Lặc</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === BIẾN CSS === */
+        :root {
+            --color-red: #8B1515;
+            --color-gold: #D4AF37;
+            --color-paper: #FDFBF7;
+            --color-dark: #2C1E16;
+            --color-white: #ffffff;
+            --color-text: #4a4a4a;
+            
+            /* Liquid Glass Variables */
+            --glass-bg-light: rgba(255, 255, 255, 0.4);
+            --glass-bg-dark: rgba(20, 10, 5, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-border-dark: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 10px 40px rgba(139, 21, 21, 0.1);
+            --transition-smooth: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--color-paper);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Merriweather', serif;
+            color: var(--color-dark);
+        }
+
+        /* === ANIMATED BACKGROUND (Nền tạo hiệu ứng kính lỏng) === */
+        .bg-animated {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: -1; overflow: hidden; background: var(--color-paper);
+        }
+        .blob {
+            position: absolute; border-radius: 50%;
+            filter: blur(80px); opacity: 0.6;
+            animation: liquidFloat 15s infinite alternate ease-in-out;
+        }
+        .blob-1 { background: var(--color-gold); width: 450px; height: 450px; top: 5%; left: 5%; }
+        .blob-2 { background: var(--color-red); width: 550px; height: 550px; bottom: 10%; right: -5%; animation-delay: -5s; animation-duration: 20s;}
+        .blob-3 { background: #d98f8f; width: 350px; height: 350px; top: 45%; left: 40%; animation-duration: 18s; animation-direction: alternate-reverse;}
+
+        @keyframes liquidFloat {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(100px, 50px) scale(1.2) rotate(45deg); border-radius: 40% 60% 60% 40%; }
+            100% { transform: translate(-50px, 100px) scale(0.9) rotate(90deg); border-radius: 60% 40% 30% 70%;}
+        }
+
+        /* === NAVBAR (Kính lỏng) === */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            transition: var(--transition-smooth); padding: 20px 0;
+            background: transparent;
+        }
+        header.scrolled {
+            background: rgba(253, 251, 247, 0.6);
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: var(--glass-shadow); padding: 10px 0;
+        }
+        .nav-container {
+            width: 90%; max-width: 1200px; margin: auto;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo a {
+            font-family: 'Merriweather', serif; font-size: 1.5rem; font-weight: 900;
+            color: var(--color-red); text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a {
+            text-decoration: none; color: var(--color-dark);
+            font-weight: 600; font-size: 1rem; position: relative; padding-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--color-red); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+            background-color: var(--color-gold); transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .menu-toggle { display: none; font-size: 1.5rem; color: var(--color-dark); cursor: pointer; }
+
+        /* === HERO SECTION === */
+        .hero {
+            position: relative; height: 65vh; min-height: 450px;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            background: linear-gradient(to right, rgba(139, 21, 21, 0.7), rgba(44, 30, 22, 0.8)), 
+                        url('https://images.unsplash.com/photo-1542640244-7e672d6cb461?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            background-attachment: fixed; color: var(--color-white); padding-top: 80px;
+        }
+        .hero-content {
+            z-index: 2; max-width: 900px; padding: 40px;
+            background: var(--glass-bg-dark); /* Kính lỏng tối */
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-radius: 30px; border: 1px solid var(--glass-border-dark);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+        .hero h1 { color: var(--color-white); font-size: 3rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.15rem; font-weight: 300; line-height: 1.8; }
+
+        /* === SECTION TITLES === */
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--color-red); position: relative; display: inline-block; }
+        .section-title h2::after {
+            content: '❁'; position: absolute; bottom: -25px; left: 50%;
+            transform: translateX(-50%); color: var(--color-gold); font-size: 1.5rem;
+        }
+
+        /* === MODERN TIMELINE (Kính lỏng) === */
+        .timeline-section { padding: 100px 0; position: relative; }
+        .timeline-container { width: 90%; max-width: 1000px; margin: 0 auto; position: relative; }
+        .timeline-container::after {
+            content: ''; position: absolute; width: 4px;
+            background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
+            top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px;
+        }
+        .timeline-item { padding: 20px 40px; position: relative; width: 50%; }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item::after {
+            content: ''; position: absolute; width: 24px; height: 24px; right: -12px;
+            background-color: var(--color-white); border: 4px solid var(--color-red);
+            top: 40px; border-radius: 50%; z-index: 1; box-shadow: 0 0 15px rgba(139, 21, 21, 0.4);
+        }
+        .timeline-item.right::after { left: -12px; }
+
+        .timeline-content {
+            padding: 35px; border-radius: 20px; position: relative;
+            background: var(--glass-bg-light); /* Kính lỏng sáng */
+            backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            transition: var(--transition-smooth);
+        }
+        .timeline-content:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 25px 50px rgba(139, 21, 21, 0.15);
+            border-color: var(--color-white);
+        }
+        .timeline-date {
+            display: inline-block; padding: 6px 18px;
+            background: linear-gradient(135deg, var(--color-gold), #b8942b);
+            color: var(--color-white); border-radius: 20px; font-weight: bold;
+            font-size: 0.9rem; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+        .timeline-content h3 { color: var(--color-dark); margin-bottom: 10px; font-size: 1.5rem; }
+
+        /* === CLB SECTION (Glass Cards tối) === */
+        .clubs-section {
+            padding: 100px 0; position: relative;
+            background: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+        }
+        .clubs-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(44, 30, 22, 0.9), rgba(139, 21, 21, 0.8));
+        }
+        .clubs-container {
+            width: 90%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px;
+        }
+        .clubs-section .section-title h2 { color: var(--color-white); }
+        
+        .club-card {
+            background: var(--glass-bg-dark); /* Kính lỏng tối */
+            backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);
+            border: 1px solid var(--glass-border-dark);
+            border-radius: 25px; padding: 45px 35px;
+            text-align: center; color: var(--color-white);
+            transition: var(--transition-smooth);
+            position: relative; overflow: hidden;
+        }
+        /* Hiệu ứng viền sáng chạy qua khi hover */
+        .club-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-20deg); transition: 0.7s;
+        }
+        .club-card:hover::before { left: 150%; }
+        .club-card:hover { transform: translateY(-15px); border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .club-icon {
+            width: 80px; height: 80px; margin: 0 auto 25px;
+            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; color: var(--color-gold); box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
+        }
+        .club-card h3 { color: var(--color-gold); margin-bottom: 15px; font-size: 1.4rem;}
+
+        /* === BỘ SƯU TẬP (Hiệu ứng kính khi hover) === */
+        .gallery-section { padding: 100px 0; position: relative; }
+        .gallery-grid {
+            width: 90%; max-width: 1200px; margin: 0 auto; display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; grid-auto-rows: 280px;
+        }
+        .gallery-item {
+            position: relative; border-radius: 20px; overflow: hidden; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-smooth); }
+        .gallery-item.large { grid-row: span 2; }
+        
+        .gallery-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(139, 21, 21, 0.8) 0%, rgba(20, 10, 5, 0.3) 100%);
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); /* Liquid blur overlay */
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 30px; opacity: 0; transition: var(--transition-smooth);
+            border: 1px solid transparent;
+        }
+        .gallery-item:hover img { transform: scale(1.1) rotate(-1deg); }
+        .gallery-item:hover .gallery-overlay { opacity: 1; border: 1px solid rgba(255,255,255,0.2); }
+        
+        .gallery-overlay h3 { color: var(--color-gold); font-size: 1.4rem; margin-bottom: 8px; transform: translateY(30px); transition: var(--transition-smooth); }
+        .gallery-overlay p { color: var(--color-white); font-size: 0.95rem; transform: translateY(30px); transition: var(--transition-smooth); transition-delay: 0.05s; }
+        .gallery-item:hover .gallery-overlay h3, 
+        .gallery-item:hover .gallery-overlay p { transform: translateY(0); }
+
+        /* === FOOTER === */
+        footer {
+            background-color: var(--color-dark); color: var(--color-white);
+            padding: 70px 0 30px; text-align: center; position: relative; z-index: 10;
+        }
+
+        /* === HIỆU ỨNG & RESPONSIVE === */
+        .reveal { opacity: 0; transform: translateY(50px); transition: 0.9s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background: var(--glass-bg-light); backdrop-filter: blur(20px);
+                flex-direction: column; text-align: center; gap: 0;
+                max-height: 0; overflow: hidden; transition: var(--transition-smooth);
+            }
+            .nav-links.active { max-height: 400px; padding: 15px 0; border-bottom: 2px solid var(--color-red); box-shadow: 0 10px 20px rgba(0,0,0,0.1);}
+            .nav-links li { padding: 15px 0; }
+            .menu-toggle { display: block; }
+            
+            .timeline-container::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; }
+            .timeline-item.right { left: 0; }
+            .timeline-item::after { left: 19px !important; }
+            
+            .hero h1 { font-size: 2.2rem; }
+            .hero-content { padding: 30px 20px; backdrop-filter: blur(8px); }
+            .gallery-item.large { grid-row: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation (Kính lỏng) -->
+    <div class="bg-animated">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Header (Navigation) -->
+    <header id="navbar">
+        <nav class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-yin-yang"></i>
+                <a href="index.html">DTNT Ngọc Lặc</a>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="#timeline">Sự Kiện</a></li>
+                <li><a href="#clubs" class="active">Câu Lạc Bộ</a></li>
+                <li><a href="#gallery">Thư Viện Ảnh</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Nhịp đập DTNT Ngọc Lặc</h1>
+            <p>Nơi hội tụ tinh hoa văn hóa các dân tộc anh em vùng cao. Hơn cả một ngôi trường, đây là mái nhà chung ấm áp – nơi ươm mầm tri thức, rèn luyện kỹ năng tự lập và gắn kết những tâm hồn đồng điệu.</p>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline-section">
+        <div class="section-title reveal">
+            <h2>Dấu Ấn Sự Kiện</h2>
+            <p style="margin-top: 10px; color: var(--color-text);">Những cột mốc thanh xuân rực rỡ dưới mái trường nội trú.</p>
+        </div>
+        
+        <div class="timeline-container">
+            <!-- Timeline Item 1 -->
+            <div class="timeline-item left reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Tháng 8 - Chào Tân Học Sinh</span>
+                    <h3>Tuần Lễ "Bước Đệm Nội Trú"</h3>
+                    <p>Chào đón các em lớp 10 xa nhà. Cùng nhau học cách tự lập, sắp xếp nội vụ, làm quen với nếp sống tập thể và kết nối với những người "anh em ruột thịt" cùng phòng.</p>
+                </div>
+            </div>
+            
+            <!-- Timeline Item 2 -->
+            <div class="timeline-item right reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Tháng 11 - Nhớ Ơn Thầy Cô</span>
+                    <h3>Lễ Hội Sắc Màu Dân Tộc</h3>
+                    <p>Sân trường bùng nổ với các điệu múa sạp, tiếng cồng chiêng và màn trình diễn trang phục truyền thống rực rỡ của dân tộc Mường, Thái, Dao... Một lời tri ân độc đáo gửi tới các thầy cô giáo.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="timeline-item left reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Tháng 1/2 - Xuân Yêu Thương</span>
+                    <h3>Đêm Hội Giao Thừa Bản Làng</h3>
+                    <p>Cảm giác đón Tết sớm ngay tại trường! Học sinh cùng nhau chẻ lạt, gói bánh chưng, nướng sắn bên bếp lửa trại và ca hát thâu đêm để vơi đi nỗi nhớ nhà.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 4 -->
+            <div class="timeline-item right reveal">
+                <div class="timeline-content">
+                    <span class="timeline-date">Tháng 3 - Sức Trẻ Thanh Hóa</span>
+                    <h3>Hội Thao Truyền Thống</h3>
+                    <p>Những màn tranh tài nảy lửa nhưng đậm tình đoàn kết: từ bóng đá, bóng chuyền đến các môn thể thao dân tộc như bắn nỏ, đẩy gậy, kéo co, tung còn.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLB Section (Glassmorphism) -->
+    <section id="clubs" class="clubs-section">
+        <div class="section-title reveal">
+            <h2>Hệ Thống Câu Lạc Bộ</h2>
+            <p style="color: var(--color-gray-light); margin-top: 10px;">Phát triển toàn diện năng khiếu, tự hào bản sắc quê hương.</p>
+        </div>
+        
+        <div class="clubs-container">
+            <div class="club-card reveal">
+                <div class="club-icon"><i class="fa-solid fa-drum"></i></div>
+                <h3>CLB Bảo Tồn Văn Hóa</h3>
+                <p>Nơi lưu giữ và truyền ngọn lửa đam mê với các làn điệu dân ca, tiếng khèn, điệu múa sạp và hát xường. Đưa văn hóa bản làng tỏa sáng.</p>
+            </div>
+            
+            <div class="club-card reveal" style="transition-delay: 0.1s;">
+                <div class="club-icon"><i class="fa-solid fa-house-chimney-user"></i></div>
+                <h3>CLB Kỹ Năng Nội Trú</h3>
+                <p>Học cách "sống sót" và trưởng thành: từ kỹ năng quản lý tài chính cá nhân, sơ cứu y tế, cho đến nghệ thuật nấu những bữa cơm tập thể ngon miêng.</p>
+            </div>
+            
+            <div class="club-card reveal" style="transition-delay: 0.2s;">
+                <div class="club-icon"><i class="fa-solid fa-palette"></i></div>
+                <h3>CLB Nghệ Thuật & Thể Thao</h3>
+                <p>Sân chơi đa dạng cho các tài năng: hội họa, MC, nhảy hiện đại kết hợp truyền thống, và đội tuyển bóng chuyền bách chiến bách thắng của trường.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="section-title reveal">
+            <h2>Góc Nhỏ Kỷ Niệm</h2>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item large reveal">
+                <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Giao lưu văn hóa dân tộc">
+                <div class="gallery-overlay">
+                    <h3>Giao Lưu Văn Hóa</h3>
+                    <p>Các nữ sinh thướt tha trong trang phục truyền thống Thái, Mường.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Giờ tự học">
+                <div class="gallery-overlay">
+                    <h3>Giờ Tự Học</h3>
+                    <p>Chăm chỉ bên trang sách, nuôi dưỡng ước mơ thoát nghèo.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Thi đấu thể thao">
+                <div class="gallery-overlay">
+                    <h3>Tranh Tài Thể Thao</h3>
+                    <p>Hội thi đẩy gậy - Quyết liệt, máu lửa và đầy tự hào.</p>
+                </div>
+            </div>
+            <div class="gallery-item large reveal">
+                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sinh hoạt phòng nội trú">
+                <div class="gallery-overlay">
+                    <h3>Gắn Kết Anh Em</h3>
+                    <p>Những bữa cơm tối, tiếng đàn guitar vang vọng hành lang khu nội trú.</p>
+                </div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tình nguyện">
+                <div class="gallery-overlay">
+                    <h3>Tình Nguyện Về Bản</h3>
+                    <p>Đem tri thức và yêu thương lan tỏa đến những vùng cao gian khó.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div style="font-family: 'Merriweather', serif; font-size: 1.5rem; color: var(--color-gold); margin-bottom: 15px;">
+            <i class="fa-solid fa-yin-yang"></i> THPT DTNT Ngọc Lặc
+        </div>
+        <p>&copy; 2026 Trường THPT DTNT Ngọc Lặc. Nơi nuôi dưỡng trí tuệ - Bảo tồn bản sắc.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Mobile Menu Toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('nav-links');
+            const icon = mobileMenu.querySelector('i');
+
+            mobileMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // 2. Navbar Liquid Glass Effect on Scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // 3. Scroll Reveal Animation 
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => {
+                revealOnScroll.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
