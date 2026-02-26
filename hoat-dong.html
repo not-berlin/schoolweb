@@ -3,31 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoạt Động & Sự Kiện - THPT DTNT Ngọc Lặc</title>
+    <title>Trường THPT DTNT Ngọc Lặc - Trang Chủ</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <style>
-        /* === BIẾN CSS === */
+        /* === CSS VARIABLES === */
         :root {
             --color-red: #8B1515;
             --color-gold: #D4AF37;
             --color-paper: #FDFBF7;
             --color-dark: #2C1E16;
             --color-white: #ffffff;
-            --color-text: #4a4a4a;
             
-            /* Liquid Glass Variables */
-            --glass-bg-light: rgba(255, 255, 255, 0.4);
-            --glass-bg-dark: rgba(20, 10, 5, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.3);
-            --glass-border-dark: rgba(255, 255, 255, 0.1);
-            --glass-shadow: 0 10px 40px rgba(139, 21, 21, 0.1);
-            --transition-smooth: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Glassmorphism Tokens */
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            --blur-val: 16px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,463 +35,1354 @@
         body {
             font-family: 'Nunito', sans-serif;
             background-color: var(--color-paper);
-            color: var(--color-text);
+            color: var(--color-dark);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
         }
 
-        h1, h2, h3, h4, .font-serif {
-            font-family: 'Merriweather', serif;
-            color: var(--color-dark);
+        h1, h2, h3, .font-serif {
+            font-family: 'Manrope', serif;
         }
 
-        /* === ANIMATED BACKGROUND (Nền tạo hiệu ứng kính lỏng) === */
-        .bg-animated {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            z-index: -1; overflow: hidden; background: var(--color-paper);
-        }
-        .blob {
-            position: absolute; border-radius: 50%;
-            filter: blur(80px); opacity: 0.6;
-            animation: liquidFloat 15s infinite alternate ease-in-out;
-        }
-        .blob-1 { background: var(--color-gold); width: 450px; height: 450px; top: 5%; left: 5%; }
-        .blob-2 { background: var(--color-red); width: 550px; height: 550px; bottom: 10%; right: -5%; animation-delay: -5s; animation-duration: 20s;}
-        .blob-3 { background: #d98f8f; width: 350px; height: 350px; top: 45%; left: 40%; animation-duration: 18s; animation-direction: alternate-reverse;}
-
-        @keyframes liquidFloat {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            50% { transform: translate(100px, 50px) scale(1.2) rotate(45deg); border-radius: 40% 60% 60% 40%; }
-            100% { transform: translate(-50px, 100px) scale(0.9) rotate(90deg); border-radius: 60% 40% 30% 70%;}
-        }
-
-        /* === NAVBAR (Kính lỏng) === */
+        /* === GLASS NAVIGATION === */
         header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            transition: var(--transition-smooth); padding: 20px 0;
-            background: transparent;
+            padding: 20px 0; transition: all 0.4s ease;
         }
         header.scrolled {
-            background: rgba(253, 251, 247, 0.6);
-            backdrop-filter: blur(20px) saturate(150%);
-            -webkit-backdrop-filter: blur(20px) saturate(150%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: var(--glass-shadow); padding: 10px 0;
+            padding: 12px 0;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(var(--blur-val));
+            -webkit-backdrop-filter: blur(var(--blur-val));
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
         }
         .nav-container {
             width: 90%; max-width: 1200px; margin: auto;
             display: flex; justify-content: space-between; align-items: center;
         }
         .logo a {
-            font-family: 'Merriweather', serif; font-size: 1.5rem; font-weight: 900;
-            color: var(--color-red); text-decoration: none;
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; color: var(--color-red);
+            font-family: 'Merriweather', serif; font-size: 1.6rem; font-weight: 900;
         }
-        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links { display: flex; list-style: none; gap: 35px; }
         .nav-links a {
             text-decoration: none; color: var(--color-dark);
-            font-weight: 600; font-size: 1rem; position: relative; padding-bottom: 5px;
-            transition: color 0.3s ease;
+            font-weight: 700; font-size: 1rem; position: relative;
+            transition: color 0.3s;
         }
-        .nav-links a:hover, .nav-links a.active { color: var(--color-red); }
+        .nav-links a:hover { color: var(--color-red); }
         .nav-links a::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-            background-color: var(--color-gold); transition: width 0.3s ease;
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--color-gold); transition: width 0.3s;
         }
-        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-        .menu-toggle { display: none; font-size: 1.5rem; color: var(--color-dark); cursor: pointer; }
+        .nav-links a:hover::after { width: 100%; }
 
         /* === HERO SECTION === */
         .hero {
-            position: relative; height: 65vh; min-height: 450px;
-            display: flex; align-items: center; justify-content: center; text-align: center;
-            background: linear-gradient(to right, rgba(139, 21, 21, 0.7), rgba(44, 30, 22, 0.8)), 
-                        url('https://images.unsplash.com/photo-1542640244-7e672d6cb461?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            background-attachment: fixed; color: var(--color-white); padding-top: 80px;
+            position: relative; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white;
         }
-        .hero-content {
-            z-index: 2; max-width: 900px; padding: 40px;
-            background: var(--glass-bg-dark); /* Kính lỏng tối */
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border-radius: 30px; border: 1px solid var(--glass-border-dark);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        .hero-glass-card {
+            background: rgba(255, 255, 255, 0);
+            border: 1px solid rgba(255, 255, 255, 0);
+            border-radius: 30px; padding: 600px 40px;
+            max-width: 800px; width: 90%;
             animation: fadeInUp 1s ease;
         }
-        .hero h1 { color: var(--color-white); font-size: 3rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1.15rem; font-weight: 300; line-height: 1.8; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.2rem; font-weight: 300; margin-bottom: 30px; }
+        .btn-cta {
+            display: inline-block; padding: 15px 40px;
+            background: var(--color-gold); color: var(--color-dark);
+            text-decoration: none; font-weight: 800; border-radius: 50px;
+            transition: all 0.3s; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        .btn-cta:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5); }
 
-        /* === SECTION TITLES === */
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title h2 { font-size: 2.5rem; color: var(--color-red); position: relative; display: inline-block; }
-        .section-title h2::after {
-            content: '❁'; position: absolute; bottom: -25px; left: 50%;
-            transform: translateX(-50%); color: var(--color-gold); font-size: 1.5rem;
+        /* === SECTIONS GENERAL === */
+        section { padding: 100px 0; position: relative; }
+        .container { width: 90%; max-width: 1200px; margin: auto; }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-header h2 { font-size: 2.8rem; color: var(--color-red); margin-bottom: 15px; }
+        .section-header .divider {
+            width: 80px; height: 4px; background: var(--color-gold);
+            margin: auto; border-radius: 2px;
         }
 
-        /* === MODERN TIMELINE (Kính lỏng) === */
-        .timeline-section { padding: 100px 0; position: relative; }
-        .timeline-container { width: 90%; max-width: 1000px; margin: 0 auto; position: relative; }
-        .timeline-container::after {
-            content: ''; position: absolute; width: 4px;
-            background: linear-gradient(to bottom, transparent, var(--color-gold), transparent);
-            top: 0; bottom: 0; left: 50%; margin-left: -2px; border-radius: 2px;
+        /* === ABOUT SECTION (Glass Cards) === */
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center;
         }
-        .timeline-item { padding: 20px 40px; position: relative; width: 50%; }
-        .timeline-item.left { left: 0; }
-        .timeline-item.right { left: 50%; }
-        .timeline-item::after {
-            content: ''; position: absolute; width: 24px; height: 24px; right: -12px;
-            background-color: var(--color-white); border: 4px solid var(--color-red);
-            top: 40px; border-radius: 50%; z-index: 1; box-shadow: 0 0 15px rgba(139, 21, 21, 0.4);
+        .about-img-container {
+            position: relative; border-radius: 30px; overflow: hidden;
+            box-shadow: var(--glass-shadow);
         }
-        .timeline-item.right::after { left: -12px; }
-
-        .timeline-content {
-            padding: 35px; border-radius: 20px; position: relative;
-            background: var(--glass-bg-light); /* Kính lỏng sáng */
-            backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            transition: var(--transition-smooth);
-        }
-        .timeline-content:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255, 255, 255, 0.6);
-            box-shadow: 0 25px 50px rgba(139, 21, 21, 0.15);
-            border-color: var(--color-white);
-        }
-        .timeline-date {
-            display: inline-block; padding: 6px 18px;
-            background: linear-gradient(135deg, var(--color-gold), #b8942b);
-            color: var(--color-white); border-radius: 20px; font-weight: bold;
-            font-size: 0.9rem; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
-        }
-        .timeline-content h3 { color: var(--color-dark); margin-bottom: 10px; font-size: 1.5rem; }
-
-        /* === CLB SECTION (Glass Cards tối) === */
-        .clubs-section {
-            padding: 100px 0; position: relative;
-            background: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
-        }
-        .clubs-section::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(44, 30, 22, 0.9), rgba(139, 21, 21, 0.8));
-        }
-        .clubs-container {
-            width: 90%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px;
-        }
-        .clubs-section .section-title h2 { color: var(--color-white); }
+        .about-img-container img { width: 100%; display: block; border-radius: 30px; }
         
-        .club-card {
-            background: var(--glass-bg-dark); /* Kính lỏng tối */
-            backdrop-filter: blur(20px) saturate(120%); -webkit-backdrop-filter: blur(20px) saturate(120%);
-            border: 1px solid var(--glass-border-dark);
-            border-radius: 25px; padding: 45px 35px;
-            text-align: center; color: var(--color-white);
-            transition: var(--transition-smooth);
-            position: relative; overflow: hidden;
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-val)); -webkit-backdrop-filter: blur(var(--blur-val));
+            border: 1px solid var(--glass-border);
+            border-radius: 25px; padding: 40px;
+            box-shadow: var(--glass-shadow);
+            transition: transform 0.3s ease;
         }
-        /* Hiệu ứng viền sáng chạy qua khi hover */
-        .club-card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
-            transform: skewX(-20deg); transition: 0.7s;
-        }
-        .club-card:hover::before { left: 150%; }
-        .club-card:hover { transform: translateY(-15px); border-color: rgba(212, 175, 55, 0.5); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .club-icon {
-            width: 80px; height: 80px; margin: 0 auto 25px;
-            background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 2rem; color: var(--color-gold); box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
-        }
-        .club-card h3 { color: var(--color-gold); margin-bottom: 15px; font-size: 1.4rem;}
+        .glass-card:hover { transform: translateY(-10px); }
 
-        /* === BỘ SƯU TẬP (Hiệu ứng kính khi hover) === */
-        .gallery-section { padding: 100px 0; position: relative; }
-        .gallery-grid {
-            width: 90%; max-width: 1200px; margin: 0 auto; display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; grid-auto-rows: 280px;
+        /* === STATS SECTION === */
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px; margin-top: -50px; position: relative; z-index: 10;
         }
-        .gallery-item {
-            position: relative; border-radius: 20px; overflow: hidden; cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        .stat-item {
+            text-align: center; padding: 30px;
+            background: rgba(139, 21, 21, 0.9); color: white;
+            border-radius: 20px; box-shadow: 0 15px 30px rgba(139, 21, 21, 0.2);
         }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-smooth); }
-        .gallery-item.large { grid-row: span 2; }
-        
-        .gallery-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(139, 21, 21, 0.8) 0%, rgba(20, 10, 5, 0.3) 100%);
-            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); /* Liquid blur overlay */
-            display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 30px; opacity: 0; transition: var(--transition-smooth);
-            border: 1px solid transparent;
+        .stat-item h3 { font-size: 2.5rem; color: var(--color-gold); }
+
+        /* === NEWS SECTION === */
+        .news-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;
         }
-        .gallery-item:hover img { transform: scale(1.1) rotate(-1deg); }
-        .gallery-item:hover .gallery-overlay { opacity: 1; border: 1px solid rgba(255,255,255,0.2); }
-        
-        .gallery-overlay h3 { color: var(--color-gold); font-size: 1.4rem; margin-bottom: 8px; transform: translateY(30px); transition: var(--transition-smooth); }
-        .gallery-overlay p { color: var(--color-white); font-size: 0.95rem; transform: translateY(30px); transition: var(--transition-smooth); transition-delay: 0.05s; }
-        .gallery-item:hover .gallery-overlay h3, 
-        .gallery-item:hover .gallery-overlay p { transform: translateY(0); }
+        .news-card {
+            background: var(--glass-bg);
+            border-radius: 25px; overflow: hidden;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(var(--blur-val));
+            transition: all 0.4s ease;
+        }
+        .news-card:hover { transform: scale(1.03); border-color: var(--color-gold); }
+        .news-img { height: 200px; background-size: cover; background-position: center; }
+        .news-content { padding: 25px; }
+        .news-content h4 { font-size: 1.3rem; margin-bottom: 15px; color: var(--color-red); }
+        .news-date { font-size: 0.85rem; color: #888; margin-bottom: 10px; display: block; }
 
         /* === FOOTER === */
         footer {
-            background-color: var(--color-dark); color: var(--color-white);
-            padding: 70px 0 30px; text-align: center; position: relative; z-index: 10;
+            background: var(--color-dark); color: white;
+            padding: 80px 0 40px; position: relative;
         }
+        .footer-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px;
+            margin-bottom: 50px;
+        }
+        .footer-logo { font-size: 1.8rem; color: var(--color-gold); margin-bottom: 20px; }
+        .footer-col h4 { margin-bottom: 25px; position: relative; padding-bottom: 10px; }
+        .footer-col h4::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background: var(--color-gold);
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #ccc; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--color-gold); padding-left: 5px; }
 
-        /* === HIỆU ỨNG & RESPONSIVE === */
-        .reveal { opacity: 0; transform: translateY(50px); transition: 0.9s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        /* === RESPONSIVE === */
+        @media (max-width: 992px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+        
+        .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        /* === BIẾN CSS (CSS Variables) === */
+        :root {
+            --color-red: #8B1515;
+            --color-gold: #D4AF37;
+            --color-paper: #FDFBF7;
+            --color-dark: #2C1E16;
+            --color-white: #ffffff;
+            --color-gray-light: #f3f4f6;
+            --color-gray: #6b7280;
+            --color-gray-dark: #374151;
+            
+            --font-serif: 'Manrope', serif;
+            --font-sans: 'Manrope', sans-serif;
 
-        @media (max-width: 768px) {
-            .nav-links {
-                position: absolute; top: 100%; left: 0; width: 100%;
-                background: var(--glass-bg-light); backdrop-filter: blur(20px);
-                flex-direction: column; text-align: center; gap: 0;
-                max-height: 0; overflow: hidden; transition: var(--transition-smooth);
-            }
-            .nav-links.active { max-height: 400px; padding: 15px 0; border-bottom: 2px solid var(--color-red); box-shadow: 0 10px 20px rgba(0,0,0,0.1);}
-            .nav-links li { padding: 15px 0; }
-            .menu-toggle { display: block; }
-            
-            .timeline-container::after { left: 31px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 20px; }
-            .timeline-item.right { left: 0; }
-            .timeline-item::after { left: 19px !important; }
-            
-            .hero h1 { font-size: 2.2rem; }
-            .hero-content { padding: 30px 20px; backdrop-filter: blur(8px); }
-            .gallery-item.large { grid-row: span 1; }
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+
+        /* === RESET & CƠ BẢN === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-paper);
+            color: var(--color-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* === TIỆN ÍCH (Utilities) === */
+        .text-red { color: var(--color-red); }
+        .text-gold { color: var(--color-gold); }
+        .text-dark { color: var(--color-dark); }
+        .font-serif { font-family: var(--font-serif); }
+        .text-center { text-align: center; }
+        
+        .section { padding: 80px 0; }
+        .bg-white { background-color: var(--color-white); }
+        .bg-paper { background-color: var(--color-paper); }
+
+        /* Nút bấm (Buttons) */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--color-red);
+            color: var(--color-white);
+            border: 1px solid var(--color-red);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-paper);
+            color: var(--color-red);
+            box-shadow: 0 4px 15px rgba(139, 21, 21, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--color-red);
+            border: 2px solid var(--color-red);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-red);
+            color: var(--color-white);
+        }
+
+        /* === THÀNH PHẦN (Components) === */
+        /* Thanh điều hướng (Navbar) */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 50;
+            background-color: var(--color-paper);
+            box-shadow: var(--shadow-md);
+            transition: padding 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 5px 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--color-red);
+            color: var(--color-gold);
+            border: 2px solid var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--color-red);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 32px;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .nav-links a:not(.btn-nav) {
+            color: white;
+        }
+
+        .nav-links a:not(.btn-nav):hover {
+            color: var(--color-red);
+        }
+
+        .btn-nav {
+            color: var(--color-red);
+            border: 1px solid var(--color-red);
+            padding: 8px 16px;
+            border-radius: 50px;
+        }
+
+        .btn-nav:hover {
+            background-color: var(--color-red);
+            color: var(--color-white);
+        }
+
+        .mobile-btn {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--color-dark);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: block;
+            background-color: var(--color-paper);
+            border-top: 1px solid #eee;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+        }
+
+        .mobile-menu.open {
+            max-height: 400px;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 15px 20px;
+            text-align: center;
+            color: var(--color-dark);
+            font-size: 18px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .mobile-menu a:hover {
+            background-color: #fef3c7;
+        }
+
+        /* Hero Section */
+        /* 1. Xử lý khung Hero */
+        .hero {
+            position: relative;
+            overflow: hidden; /* Đảm bảo video không tràn ra ngoài */
+            background: #000; /* Nền đen trong lúc chờ video load */
+        }
+
+        /* 2. Style cho Video - Bí kíp nằm ở object-fit */
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            object-fit: cover; /* Video sẽ phủ kín mà không bị méo */
+        }
+
+        /* 3. Lớp phủ Overlay - Cực kỳ quan trọng để đọc được chữ */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(0, 0, 0, 0.3), /* Phía trên hơi tối */
+                rgba(0, 0, 0, 0.6)  /* Phía dưới tối hơn để nổi bật chữ */
+            );
+            z-index: 1;
+        }
+
+        /* 4. Đưa nội dung lên trên cùng */
+        .hero-glass-card {
+            position: relative;
+            z-index: 2; /* Cao hơn video và overlay */
+        }
+
+        /* 5. Tương thích Navbar */
+        header {
+            /* Ban đầu để trong suốt để thấy video xuyên qua */
+            background: transparent; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        header.scrolled {
+            /* Khi cuộn mới hiện hiệu ứng Glassmorphism */
+            background: rgba(255, 255, 255, 0.7) !important;
+            backdrop-filter: blur(15px);
+        }
+
+        /* Đảm bảo chữ trên Nav dễ đọc trên nền video */
+        .nav-links a {
+            color: #ffffff; /* Màu trắng cho sang khi ở trên video */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header.scrolled .nav-links a {
+            color: var(--color-dark); /* Trở về màu tối khi cuộn xuống nền trắng */
+            text-shadow: none;
+        }
+
+        header.scrolled .logo a {
+            color: var(--color-red);
+        }
+        .logo a { color: #fff; } /* Logo màu trắng trên nền video */
+        .hero {
+            position: relative;
+            padding-top: 120px;
+            padding-bottom: 80px;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            pointer-events: none;
+            background-image: radial-gradient(circle at 2px 2px, var(--color-gold) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background-color: #fef3c7;
+            color: var(--color-red);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border: 1px solid var(--color-gold);
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-family: Manrope, serif;
+            font-size: 40px;
+            color: var(--color-dark);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--color-gray);
+            margin-bottom: 40px;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-img-wrap {
+            position: relative;
+            z-index: 10;
+            padding: 8px;
+            border: 4px double var(--color-gold);
+            border-radius: 8px;
+            background-color: var(--color-paper);
+        }
+
+        .about-img-wrap img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .about-decor-1, .about-decor-2 {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .about-decor-1 {
+            width: 120px; height: 120px;
+            background-color: var(--color-gold);
+            opacity: 0.2;
+            bottom: -20px; left: -20px;
+        }
+
+        .about-decor-2 {
+            width: 90px; height: 90px;
+            background-color: var(--color-red);
+            opacity: 0.1;
+            top: -20px; right: -20px;
+        }
+
+        .section-tag {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .section-tag-line {
+            width: 40px;
+            height: 2px;
+            background-color: var(--color-gold);
+        }
+
+        .section-tag-text {
+            font-family: var(--font-serif);
+            color: var(--color-red);
+            font-weight: bold;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .about-title {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            color: var(--color-dark);
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+
+        .about-desc {
+            color: var(--color-gray);
+            margin-bottom: 20px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 24px;
+            margin-top: 24px;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--color-gold);
+            font-family: var(--font-serif);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--color-gray);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* Achievements Section */
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header i {
+            font-size: 40px;
+            color: var(--color-gold);
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--color-gray);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--color-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card-img {
+            height: 240px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(44, 30, 22, 0.8), transparent);
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-badge {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            z-index: 10;
+            color: var(--color-white);
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .card-text {
+            color: var(--color-gray);
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-link {
+            color: var(--color-red);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-link:hover {
+            color: var(--color-gold);
+        }
+
+        /* Activities Section */
+        .activities-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            grid-auto-rows: 250px;
+        }
+
+        .activity-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            display: block;
+            box-shadow: var(--shadow-md);
+        }
+
+        .activity-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .activity-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .activity-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(44,30,22,0.9) 0%, rgba(44,30,22,0.4) 50%, transparent 100%);
+            transition: opacity 0.3s;
+        }
+
+        .activity-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-content.static {
+            transform: translateY(0);
+        }
+
+        .activity-item:hover .activity-content {
+            transform: translateY(0);
+        }
+
+        .activity-tag {
+            background-color: var(--color-gold);
+            color: var(--color-white);
+            font-size: 12px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .activity-title {
+            color: var(--color-white);
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .activity-desc {
+            color: #e5e7eb;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.1s;
+        }
+
+        .activity-item:hover .activity-desc {
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--color-dark);
+            color: var(--color-paper);
+            padding: 60px 0 30px;
+            border-top: 4px solid var(--color-red);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-decor {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            color: var(--color-gold);
+            opacity: 0.05;
+            font-size: 250px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-icon {
+            width: 40px; height: 40px;
+            background-color: var(--color-paper);
+            color: var(--color-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .footer-logo-text {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .footer-about {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 40px; height: 40px;
+            background-color: #374151;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--color-red);
+            color: var(--color-white);
+        }
+
+        .footer-heading {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        .footer-links list, .footer-contact list {
+            list-style: none;
+        }
+
+        .footer-links li, .footer-contact li {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .footer-contact i {
+            color: var(--color-red);
+            font-size: 18px;
+            margin-top: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 24px;
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* === RESPONSIVE QUERIES === */
+        @media (min-width: 768px) {
+            .nav-links { display: flex; }
+            .mobile-btn { display: none; }
+            .mobile-menu { display: none !important; }
+            
+            .hero h1 { font-size: 56px; }
+            .hero p { font-size: 20px; }
+            
+            .about-grid { grid-template-columns: 1fr 1fr; }
+            .about-text { order: 2; }
+            .about-img-wrap { order: 1; }
+            
+            .achievements-grid { grid-template-columns: repeat(3, 1fr); }
+            
+            .activities-header { flex-direction: row; align-items: flex-end; }
+            .activities-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            .footer-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .hero h1 { font-size: 72px; }
+            .about-img-wrap img { height: 400px; }
+            .activities-grid { grid-template-columns: repeat(4, 1fr); }
+            .activity-large { grid-column: span 2; grid-row: span 2; }
+            .activity-large .activity-title { font-size: 28px; }
+            .activity-wide { grid-column: span 2; }
+        }
+
+        /* === ANIMATIONS === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    /* CSS dành riêng cho Section 12A1 */
+    .section-12a1 {
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+        font-family: 'Manrope', sans-serif;
+    }
+
+    .container-12a1 {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .glass-12a1 {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 40px;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        padding: 60px;
+        box-shadow: 0 20px 50px rgba(139, 21, 21, 0.1);
+        position: relative;
+    }
+
+    /* Hiệu ứng hào quang nhỏ ở góc */
+    .glass-12a1::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, #D4AF37 0%, transparent 70%);
+        opacity: 0.3;
+        z-index: -1;
+    }
+
+    .image-12a1 {
+        flex: 1;
+        position: relative;
+    }
+
+    .image-12a1 img {
+        width: 100%;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        border: 4px solid #fff;
+        transform: rotate(-2deg);
+        transition: transform 0.4s ease;
+    }
+
+    .image-12a1:hover img {
+        transform: rotate(0deg) scale(1.03);
+    }
+
+    .content-12a1 {
+        flex: 1.5;
+    }
+
+    .badge-12a1 {
+        display: inline-block;
+        padding: 6px 15px;
+        background: #8B1515;
+        color: #fff;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+
+    .content-12a1 h2 {
+        font-family: 'Merriweather', serif;
+        font-size: 2.5rem;
+        color: #2C1E16;
+        margin-bottom: 20px;
+    }
+
+    .content-12a1 p {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    .btn-detail-12a1 {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: #D4AF37;
+        color: #2C1E16;
+        text-decoration: none;
+        padding: 14px 30px;
+        border-radius: 50px;
+        font-weight: 800;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .btn-detail-12a1:hover {
+        background: #8B1515;
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(139, 21, 21, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+        .glass-12a1 {
+            flex-direction: column;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .image-12a1 {
+            width: 80%;
+            margin-bottom: 30px;
+        }
+    }
     </style>
 </head>
 <body>
-
-    <!-- Background Animation (Kính lỏng) -->
-    <div class="bg-animated">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
-
-    <!-- Header (Navigation) -->
+    
+    <!-- Header -->
     <header id="navbar">
         <nav class="nav-container">
             <div class="logo">
-                <i class="fa-solid fa-yin-yang"></i>
-                <a href="index.html">DTNT Ngọc Lặc</a>
+                <a href="index.html">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>DTNT Ngọc Lặc</span>
+                </a>
             </div>
-            <ul class="nav-links" id="nav-links">
+            <ul class="nav-links">
                 <li><a href="index.html">Trang Chủ</a></li>
-                <li><a href="#timeline">Sự Kiện</a></li>
-                <li><a href="#clubs" class="active">Câu Lạc Bộ</a></li>
-                <li><a href="#gallery">Thư Viện Ảnh</a></li>
+                <li><a href="#gioi-thieu">Giới Thiệu</a></li>
+                <li><a href="hoat-dong.html">Hoạt Động</a></li>
+                <li><a href="#tin-tuc">Tin Tức</a></li>
+                <li><a href="#lien-he">Liên Hệ</a></li>
             </ul>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fa-solid fa-bars"></i>
-            </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Nhịp đập DTNT Ngọc Lặc</h1>
-            <p>Nơi hội tụ tinh hoa văn hóa các dân tộc anh em vùng cao. Hơn cả một ngôi trường, đây là mái nhà chung ấm áp – nơi ươm mầm tri thức, rèn luyện kỹ năng tự lập và gắn kết những tâm hồn đồng điệu.</p>
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="videointro.mp4" type="video/mp4">
+            <img src="fallback-image.jpg" alt="Background">
+        </video>
+        
+        <div class="hero-overlay"></div>
+
+        <div class="hero-glass-card">
+            <h1 style="color: #fff4f4;">TRƯỜNG THPT DTNT NGỌC LẶC</h1>
+            <a href="#gioi-thieu" class="btn-cta">Tìm hiểu ngay</a>
         </div>
     </section>
-
-    <!-- Timeline Section -->
-    <section id="timeline" class="timeline-section">
-        <div class="section-title reveal">
-            <h2>Dấu Ấn Sự Kiện</h2>
-            <p style="margin-top: 10px; color: var(--color-text);">Những cột mốc thanh xuân rực rỡ dưới mái trường nội trú.</p>
+    <!-- Stats Bar -->
+    <div class="container">
+        <div class="stats-bar">
+            <div class="stat-item reveal">
+                <h3>9</h3>
+                <p>Năm thành lập</p>
+            </div>
+            <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                <h3>500+</h3>
+                <p>Con em từ các dân tộc miền núi đang theo học</p>
+            </div>
+            <div class="stat-item reveal" style="transition-delay: 0.3s;">
+                <h3>MỨC ĐỘ II</h3>
+                <p>Chuẩn Quốc Gia</p>
+            </div>
         </div>
-        
-        <div class="timeline-container">
-            <!-- Timeline Item 1 -->
-            <div class="timeline-item left reveal">
-                <div class="timeline-content">
-                    <span class="timeline-date">Tháng 8 - Chào Tân Học Sinh</span>
-                    <h3>Tuần Lễ "Bước Đệm Nội Trú"</h3>
-                    <p>Chào đón các em lớp 10 xa nhà. Cùng nhau học cách tự lập, sắp xếp nội vụ, làm quen với nếp sống tập thể và kết nối với những người "anh em ruột thịt" cùng phòng.</p>
-                </div>
-            </div>
-            
-            <!-- Timeline Item 2 -->
-            <div class="timeline-item right reveal">
-                <div class="timeline-content">
-                    <span class="timeline-date">Tháng 11 - Nhớ Ơn Thầy Cô</span>
-                    <h3>Văn nghệ chào mừng ngày nhà giáo Việt Nam</h3>
-                    <p>Sân trường bùng nổ với các điệu múa sạp, tiếng cồng chiêng và màn trình diễn trang phục truyền thống rực rỡ của dân tộc Mường, Thái, Dao... Cùng với đó là những tiết mục văn nghệ đặc sắc từ các chi đoàn và giáo viên. Một lời tri ân độc đáo gửi tới các thầy cô giáo.</p>
-                </div>
-            </div>
+    </div>
 
-            <!-- Timeline Item 3 -->
-            <div class="timeline-item left reveal">
-                <div class="timeline-content">
-                    <span class="timeline-date">Tháng 1/2 - Xuân Yêu Thương</span>
-                    <h3>Đêm Hội Giao Thừa</h3>
-                    <p>Cảm giác đón Tết sớm ngay tại trường! Học sinh cùng nhau chẻ lạt, gói bánh chưng, nướng sắn bên bếp lửa trại và ca hát thâu đêm để vơi đi nỗi nhớ nhà.</p>
+    <!-- About Section -->
+    <section id="gioi-thieu">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-img-container reveal">
+                    <img src="congtruong.jpg" alt="Cổng trường Ngọc Lặc">
                 </div>
-            </div>
-
-            <!-- Timeline Item 4 -->
-            <div class="timeline-item right reveal">
-                <div class="timeline-content">
-                    <span class="timeline-date">Tháng 3 - Sức Trẻ THPT DTNT Ngọc Lặc</span>
-                    <h3>Hội Thao Truyền Thống</h3>
-                    <p>Những màn tranh tài nảy lửa nhưng đậm tình đoàn kết: từ bóng đá, bóng chuyền đến các môn thể thao dân tộc như đẩy gậy, kéo co, tung còn.</p>
+                <div class="glass-card reveal">
+                    <h2 style="color: var(--color-red); margin-bottom: 20px;">Về nhà trường</h2>
+                    <p style="margin-bottom: 20px;">Tọa lạc tại vùng đất Ngọc Lặc giàu truyền thống, trường THPT DTNT Ngọc Lặc là "ngôi nhà thứ hai" của hàng ngàn con em các dân tộc Mường, Thái, Dao... từ khắp các bản làng xa xôi.</p>
+                    <p>Sứ mệnh của nhà trường không chỉ là giảng dạy kiến thức phổ thông, mà còn là bảo tồn những nét đẹp văn hóa truyền thống, rèn luyện kỹ năng sống tập thể và đào tạo nguồn nhân lực chất lượng cao cho quê hương miền núi.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CLB Section (Glassmorphism) -->
-    <section id="clubs" class="clubs-section">
-        <div class="section-title reveal">
-            <h2>Hệ Thống Câu Lạc Bộ</h2>
-            <p style="color: var(--color-gray-light); margin-top: 10px;">Phát triển toàn diện năng khiếu, tự hào bản sắc quê hương.</p>
+    <!-- News Section -->
+    <section id="tin-tuc" style="background: rgba(139, 21, 21, 0.03);">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Tin Tức & Sự Kiện</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="news-grid">
+                <div class="news-card reveal">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="news-content">
+                        <span class="news-date">20 Tháng 10, 2025</span>
+                        <h4>Lễ Hội Văn Hóa Dân Tộc Ngọc Lặc</h4>
+                        <p>Tưng bừng các hoạt động múa sạp, đánh cồng chiêng chào mừng ngày Phụ nữ Việt Nam...</p>
+                    </div>
+                </div>
+                
+                <div class="news-card reveal" style="transition-delay: 0.1s;">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="news-content">
+                        <span class="news-date">15 Tháng 11, 2025</span>
+                        <h4>Khai Mạc Giải Bóng Chuyền Nam/Nữ</h4>
+                        <p>Hoạt động thể thao thường niên nhằm rèn luyện sức khỏe và thắt chặt tình đoàn kết giữa các chi đoàn...</p>
+                    </div>
+                </div>
+                
+                <div class="news-card reveal" style="transition-delay: 0.2s;">
+                    <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="news-content">
+                        <span class="news-date">05 Tháng 12, 2025</span>
+                        <h4>Khen Thưởng Học Sinh Giỏi Cấp Tỉnh</h4>
+                        <p>Vinh danh những tấm gương vượt khó học giỏi, mang lại vinh quang cho mái trường Ngọc Lặc...</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="clubs-container">
-            <div class="club-card reveal">
-                <div class="club-icon"><i class="fa-solid fa-drum"></i></div>
-                <h3>CLB Văn hóa dân gian</h3>
-                <p>Nơi lưu giữ và truyền ngọn lửa đam mê với các làn điệu dân ca, tiếng khèn, điệu múa sạp và hát xường. Đưa văn hóa bản làng tỏa sáng.</p>
-            </div>
-            
-            <div class="club-card reveal" style="transition-delay: 0.1s;">
-                <div class="club-icon"><i class="fa-solid fa-house-chimney-user"></i></div>
-                <h3>CLB Truyền thông</h3>
-                <p>Học cách "sống sót" và trưởng thành: từ kỹ năng quản lý tài chính cá nhân, sơ cứu y tế, cho đến nghệ thuật nấu những bữa cơm tập thể ngon miêng.</p>
-            </div>
-            
-            <div class="club-card reveal" style="transition-delay: 0.2s;">
-                <div class="club-icon"><i class="fa-solid fa-palette"></i></div>
-                <h3>CLB Thể Thao</h3>
-                <p>Sân chơi đa dạng cho các tài năng: hội họa, MC, nhảy hiện đại kết hợp truyền thống, và đội tuyển bóng chuyền bách chiến bách thắng của trường.</p>
+    </section>
+    <!-- Section: Hoạt động -->
+    <section id="activities" class="section bg-white" style="border-top: 1px solid #fef3c7;">
+        <div class="container">
+            <div class="activities-header reveal">
+                <div>
+                    <div class="section-tag">
+                        <div class="section-tag-line"></div>
+                        <h2 class="section-tag-text">Góc Ngoại Khóa</h2>
+                    </div>
+                    <h3 class="about-title" style="margin-bottom: 0;">Nhịp sống năng động mang <br>đậm sắc màu truyền thống</h3>
+                </div>
+                <a href="hoat-dong.html #club" class="card-link">
+                    Khám phá các hoạt động <i class="fas fa-long-arrow-alt-right"></i>
+                </a>
             </div>
 
-            <div class="club-card reveal" style="transition-delay: 0.3s;">
-                <div class="club-icon"><i class="fa-solid fa-palette"></i></div>
-                <h3>CLB Âm nhạc</h3>
-                <p>Sân chơi đa dạng cho các tài năng: hội họa, MC, nhảy hiện đại kết hợp truyền thống, và đội tuyển bóng chuyền bách chiến bách thắng của trường.</p>
+            <div class="activities-grid">
+                
+                <!-- Hoạt động 1 (Lớn) -->
+                <a href="hoat-dong.html" class="activity-item activity-large reveal">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800" alt="">
+                    <div class="activity-overlay"></div>
+                    <div class="activity-content">
+                        <span class="activity-tag">Sự kiện thường niên</span>
+                        <h4 class="activity-title">Lễ Hội Văn Hóa Dân Gian</h4>
+                        <p class="activity-desc">Trải nghiệm các trò chơi dân gian, ẩm thực truyền thống và các tiết mục biểu diễn nhạc cụ dân tộc đặc sắc.</p>
+                    </div>
+                </a>
+
+                <!-- Hoạt động 2 -->
+                <a href="hoat-dong.html" class="activity-item activity-large reveal" style="transition-delay: 100ms;">
+                    <img src="https://images.unsplash.com/photo-1577880216142-8549e9488dad?auto=format&fit=crop&q=80&w=400" alt="">
+                    <div class="activity-overlay"></div>
+                    <div class="activity-content">
+                        <h4 class="activity-title" style="margin-bottom:0; font-size:18px;">Các CLB của trường</h4>
+                        <p class="activity-desc"><p class="activity-desc">Trải nghiệm các trò chơi dân gian, ẩm thực truyề thống và các tiết mục biểu diễn nhạc cụ dân tộc đặc sắc.</p></p>
+                    </div>
+                </a>
+
+                <!-- Hoạt động 3 -->
+                <a href="hoat-dong.html" class="activity-item reveal" style="transition-delay: 200ms;">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=400" alt="">
+                    <div class="activity-overlay"></div>
+                    <div class="activity-content static">
+                        <h4 class="activity-title" style="margin-bottom:0; font-size:18px;">Hành Trình Thiện Nguyện</h4>
+                    </div>
+                </a>
+
+                <!-- Hoạt động 4 (Ngang) -->
+                <a href="hoat-dong.html" class="activity-item activity-wide reveal" style="transition-delay: 300ms;">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&q=80&w=800" alt="">
+                    <div class="activity-overlay"></div>
+                    <div class="activity-content static" style="display: flex; justify-content: space-between; align-items: flex-end;">
+                        <div>
+                            <h4 class="activity-title">Tuần Lễ Đọc Sách</h4>
+                            <p style="color: #d1d5db; font-size: 14px;">Lan tỏa tri thức, kết nối đam mê</p>
+                        </div>
+                        <div style="background: white; color: var(--color-red); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Modern Gallery Section -->
-    <section id="gallery" class="gallery-section">
-        <div class="section-title reveal">
-            <h2>Các hoạt động thường niên</h2>
-        </div>
-        
-        <div class="gallery-grid">
-            <div class="gallery-item large reveal">
-                <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Giao lưu văn hóa dân tộc">
-                <div class="gallery-overlay">
-                    <h3>Giao Lưu Văn Hóa</h3>
-                    <p>Các nữ sinh thướt tha trong trang phục truyền thống Thái, Mường.</p>
+    <section class="section-12a1">
+        <div class="container-12a1">
+            <div class="glass-12a1">
+                <!-- Ảnh minh họa lớp -->
+                <div class="image-12a1">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lớp 12A1 tiêu biểu">
                 </div>
-            </div>
-            <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Giờ tự học">
-                <div class="gallery-overlay">
-                    <h3>Giờ Tự Học</h3>
-                    <p>Chăm chỉ bên trang sách, nuôi dưỡng ước mơ thoát nghèo.</p>
-                </div>
-            </div>
-            <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Thi đấu thể thao">
-                <div class="gallery-overlay">
-                    <h3>Tranh Tài Thể Thao</h3>
-                    <p>Các cuộc thi đấu bóng đá, bóng chuyền - Quyết liệt, máu lửa và đầy tự hào.</p>
-                </div>
-            </div>
-            <div class="gallery-item large reveal">
-                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sinh hoạt phòng nội trú">
-                <div class="gallery-overlay">
-                    <h3>Gắn Kết Anh Em</h3>
-                    <p>Những bữa cơm tối, tiếng đàn guitar vang vọng hành lang khu nội trú.</p>
-                </div>
-            </div>
-            <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tình nguyện">
-                <div class="gallery-overlay">
-                    <h3>Tình Nguyện Về Bản</h3>
-                    <p>Đem tri thức và yêu thương lan tỏa đến những vùng cao gian khó.</p>
+
+                <!-- Nội dung giới thiệu -->
+                <div class="content-12a1">
+                    <span class="badge-12a1">Tập thể tiêu biểu</span>
+                    <h2>Lớp 12A1: Biệt đội "Thợ săn danh hiệu"</h2>
+                    <p>
+                        Nghe đâu bảo đây là cái nôi của những thủ khoa tương lai? 12A1 không chỉ nổi tiếng với thành tích học tập "khủng" mà còn là đội quân tiên phong trong mọi hoạt động văn nghệ, thể thao của trường Ngọc Lặc. Một tập thể đoàn kết, lầy lội nhưng khi đã học là "cháy" hết mình.
+                    </p>
+                    
+                    <!-- Nút dẫn tới trang chi tiết -->
+                    <a href="12a1-detail.html" class="btn-detail-12a1">
+                        Tìm hiểu về 12A1 <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div style="font-family: 'Merriweather', serif; font-size: 1.5rem; color: var(--color-gold); margin-bottom: 15px;">
-            <i class="fa-solid fa-yin-yang"></i> THPT DTNT Ngọc Lặc
+    <footer id="lien-he">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">THPT DTNT Ngọc Lặc</div>
+                    <p>Địa chỉ: Phố Cầu Cát, Thị trấn Ngọc Lặc, huyện Ngọc Lặc, tỉnh Thanh Hóa.</p>
+                    <p style="margin-top: 15px;"><i class="fa-solid fa-phone"></i> 0237.xxx.xxx</p>
+                    <p><i class="fa-solid fa-envelope"></i> thpt.dtnt.ngoclac@edu.vn</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên Kết Nhanh</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Sơ đồ trường</a></li>
+                        <li><a href="#">Lịch công tác tuần</a></li>
+                        <li><a href="#">Thông tin tuyển sinh</a></li>
+                        <li><a href="#">Tra cứu điểm số</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Mạng Xã Hội</h4>
+                    <div style="display: flex; gap: 15px; font-size: 1.5rem;">
+                        <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
+                <p>&copy; 2026 Trường THPT Dân tộc Nội trú Ngọc Lặc</p>
+            </div>
         </div>
-        <p>&copy; 2026 Trường THPT DTNT Ngọc Lặc. Nơi nuôi dưỡng trí tuệ - Bảo tồn bản sắc.</p>
     </footer>
 
-    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Mobile Menu Toggle
-            const mobileMenu = document.getElementById('mobile-menu');
-            const navLinks = document.getElementById('nav-links');
-            const icon = mobileMenu.querySelector('i');
-
-            mobileMenu.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                if (navLinks.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-
-            // 2. Navbar Liquid Glass Effect on Scroll
             const navbar = document.getElementById('navbar');
+            
+            // Navbar Scroll Effect
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 20) {
+                if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
                 }
             });
 
-            // 3. Scroll Reveal Animation 
+            // Intersection Observer for Reveal Animations
             const revealElements = document.querySelectorAll('.reveal');
-            const revealOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            };
-
-            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
                     }
                 });
-            }, revealOptions);
+            }, { threshold: 0.1 });
 
-            revealElements.forEach(el => {
-                revealOnScroll.observe(el);
-            });
+            revealElements.forEach(el => observer.observe(el));
         });
     </script>
 </body>

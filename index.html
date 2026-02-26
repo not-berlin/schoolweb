@@ -1002,6 +1002,129 @@
             opacity: 1;
             transform: translateY(0);
         }
+    /* CSS dành riêng cho Section 12A1 */
+    .section-12a1 {
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+        font-family: 'Manrope', sans-serif;
+    }
+
+    .container-12a1 {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .glass-12a1 {
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 40px;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        padding: 60px;
+        box-shadow: 0 20px 50px rgba(139, 21, 21, 0.1);
+        position: relative;
+    }
+
+    /* Hiệu ứng hào quang nhỏ ở góc */
+    .glass-12a1::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle, #D4AF37 0%, transparent 70%);
+        opacity: 0.3;
+        z-index: -1;
+    }
+
+    .image-12a1 {
+        flex: 1;
+        position: relative;
+    }
+
+    .image-12a1 img {
+        width: 100%;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        border: 4px solid #fff;
+        transform: rotate(-2deg);
+        transition: transform 0.4s ease;
+    }
+
+    .image-12a1:hover img {
+        transform: rotate(0deg) scale(1.03);
+    }
+
+    .content-12a1 {
+        flex: 1.5;
+    }
+
+    .badge-12a1 {
+        display: inline-block;
+        padding: 6px 15px;
+        background: #8B1515;
+        color: #fff;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+
+    .content-12a1 h2 {
+        font-family: 'Merriweather', serif;
+        font-size: 2.5rem;
+        color: #2C1E16;
+        margin-bottom: 20px;
+    }
+
+    .content-12a1 p {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    .btn-detail-12a1 {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: #D4AF37;
+        color: #2C1E16;
+        text-decoration: none;
+        padding: 14px 30px;
+        border-radius: 50px;
+        font-weight: 800;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .btn-detail-12a1:hover {
+        background: #8B1515;
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(139, 21, 21, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+        .glass-12a1 {
+            flex-direction: column;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .image-12a1 {
+            width: 80%;
+            margin-bottom: 30px;
+        }
+    }
     </style>
 </head>
 <body>
@@ -1062,7 +1185,7 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-img-container reveal">
-                    <img src="https://images.unsplash.com/photo-1523050853064-850450590a3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cổng trường Ngọc Lặc">
+                    <img src="congtruong.jpg" alt="Cổng trường Ngọc Lặc">
                 </div>
                 <div class="glass-card reveal">
                     <h2 style="color: var(--color-red); margin-bottom: 20px;">Về nhà trường</h2>
@@ -1122,7 +1245,7 @@
                     </div>
                     <h3 class="about-title" style="margin-bottom: 0;">Nhịp sống năng động mang <br>đậm sắc màu truyền thống</h3>
                 </div>
-                <a href="hoat-dong.html" class="card-link">
+                <a href="hoat-dong.html #club" class="card-link">
                     Khám phá các hoạt động <i class="fas fa-long-arrow-alt-right"></i>
                 </a>
             </div>
@@ -1173,6 +1296,31 @@
                         </div>
                     </div>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-12a1">
+        <div class="container-12a1">
+            <div class="glass-12a1">
+                <!-- Ảnh minh họa lớp -->
+                <div class="image-12a1">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lớp 12A1 tiêu biểu">
+                </div>
+
+                <!-- Nội dung giới thiệu -->
+                <div class="content-12a1">
+                    <span class="badge-12a1">Tập thể tiêu biểu</span>
+                    <h2>Lớp 12A1: Biệt đội "Thợ săn danh hiệu"</h2>
+                    <p>
+                        Nghe đâu bảo đây là cái nôi của những thủ khoa tương lai? 12A1 không chỉ nổi tiếng với thành tích học tập "khủng" mà còn là đội quân tiên phong trong mọi hoạt động văn nghệ, thể thao của trường Ngọc Lặc. Một tập thể đoàn kết, lầy lội nhưng khi đã học là "cháy" hết mình.
+                    </p>
+                    
+                    <!-- Nút dẫn tới trang chi tiết -->
+                    <a href="12a1-detail.html" class="btn-detail-12a1">
+                        Tìm hiểu về 12A1 <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
