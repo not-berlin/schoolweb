@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12A1 K7 - Những Chiến Binh Ngọc Lặc</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=Merriweather:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sky-blue: #F0F9FF;
+            --ocean-blue: #0EA5E9;
+            --deep-blue: #0369A1;
+            --soft-blue: #BAE6FD;
+            --glass-white: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --text-dark: #1E293B;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--sky-blue);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === NAVBAR === */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; transition: var(--transition);
+        }
+        header.scrolled {
+            background: rgba(240, 249, 255, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .nav-container {
+            width: 90%; max-width: 1200px; margin: auto;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a, .back-link { text-decoration: none; color: white; font-weight: 700; font-size: 0.9rem; transition: 0.3s; }
+        
+        header.scrolled .nav-links a, header.scrolled .back-link { color: var(--deep-blue) !important; }
+
+        /* === HERO (Toàn màn hình) === */
+        .hero-12a1 {
+            height: 100vh; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1523580494863-6f3031224b94?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            background-attachment: fixed;
+            position: relative; color: white;
+            overflow: hidden;
+        }
+        
+        /* Hiệu ứng nhô lên cho tiêu đề */
+        .hero-content .reveal-text {
+            display: block;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .hero-content h1, .hero-content p {
+            margin: 0;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: riseUp 1.2s cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+        }
+
+        .hero-content p.welcome-msg { 
+            font-size: 1.2rem; 
+            letter-spacing: 4px; 
+            font-weight: 300;
+            animation-delay: 0.2s;
+        }
+
+        .hero-content h1 {
+            font-family: 'Merriweather', serif; 
+            font-size: clamp(3.5rem, 12vw, 7rem);
+            font-weight: 900;
+            line-height: 1.1;
+            animation-delay: 0.4s;
+        }
+
+        .hero-content p.slogan-msg { 
+            font-size: 1.1rem; 
+            letter-spacing: 6px; 
+            font-weight: 400;
+            margin-top: 15px;
+            animation-delay: 0.6s;
+            text-transform: uppercase;
+        }
+        
+        @keyframes riseUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === LAYOUT CHUNG === */
+        .container { width: 90%; max-width: 1200px; margin: auto; }
+        section { padding: 100px 0; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-family: 'Merriweather', serif; font-size: 2.8rem; color: var(--deep-blue); position: relative; display: inline-block; }
+        .section-title h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; width: 50px; height: 3px; background: var(--ocean-blue); transform: translateX(-50%); }
+
+        /* === BỘ SẬU === */
+        .team-grid {
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
+        }
+        @media (max-width: 992px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .member-card {
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: var(--transition);
+            border: 1px solid var(--glass-border); text-align: center;
+            display: flex; flex-direction: column;
+        }
+        .member-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15); }
+        .member-img { width: 100%; height: 250px; object-fit: cover; }
+        .member-info { padding: 20px; flex-grow: 1; }
+        .member-info p.role { font-size: 0.8rem; color: var(--ocean-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
+        .member-info h3 { font-size: 1.1rem; color: var(--deep-blue); margin-bottom: 10px; }
+        .member-info p.desc { font-size: 0.85rem; color: #64748b; font-style: italic; line-height: 1.4; }
+
+        /* === BẢNG VÀNG === */
+        .award-card {
+            background: white; border-radius: 30px; padding: 40px; margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.03); border: 1px solid var(--glass-border);
+        }
+        .award-card h3 { color: var(--deep-blue); font-size: 1.6rem; margin-bottom: 15px; }
+        .award-images {
+            display: flex; gap: 15px; overflow-x: auto; margin-top: 25px; padding-bottom: 10px;
+        }
+        .award-images img { width: 300px; height: 200px; object-fit: cover; border-radius: 15px; flex-shrink: 0; transition: 0.3s; }
+        .award-images img:hover { transform: scale(1.02); }
+
+        /* === TIMELINE === */
+        .timeline { position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0; }
+        .timeline::after { content: ''; position: absolute; width: 2px; background: var(--soft-blue); top: 0; bottom: 0; left: 50%; margin-left: -1px; }
+        
+        .timeline-item { padding: 10px 40px; position: relative; width: 50%; }
+        .timeline-item::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: white; border: 4px solid var(--ocean-blue); top: 15px; border-radius: 50%; z-index: 1; }
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; }
+        .right::after { left: -10px; }
+
+        .timeline-content { padding: 20px 30px; background: white; position: relative; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .timeline-year { font-weight: 900; color: var(--ocean-blue); font-size: 1.5rem; margin-bottom: 10px; }
+        .timeline-pics { display: flex; gap: 10px; margin-top: 15px; justify-content: flex-start; }
+        .left .timeline-pics { justify-content: flex-end; }
+        .timeline-pics img { width: 80px; height: 60px; object-fit: cover; border-radius: 8px; transition: 0.3s; cursor: pointer; }
+        .timeline-pics img:hover { transform: scale(1.5); z-index: 10; }
+
+        @media (max-width: 768px) {
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left !important; }
+            .timeline-item::after { left: 21px; }
+            .right { left: 0%; }
+            .left .timeline-pics { justify-content: flex-start; }
+        }
+
+        /* === LỜI NHẮN === */
+        .message-wall {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 40px 0;
+        }
+        .sticky-note {
+            width: 320px; background: #fff; padding: 30px;
+            box-shadow: 5px 10px 30px rgba(0,0,0,0.05);
+            transition: 0.3s; position: relative;
+        }
+        .sticky-note:nth-child(1) { transform: rotate(-3deg); background: #fffdf2; }
+        .sticky-note:nth-child(2) { transform: rotate(2deg); background: #f2faff; }
+        .sticky-note:nth-child(3) { transform: rotate(-1deg); background: #fff2f2; }
+        .sticky-note:hover { transform: rotate(0deg) scale(1.05); z-index: 5; }
+
+        .note-content { font-family: 'Merriweather', serif; font-style: italic; margin-bottom: 20px; line-height: 1.8; }
+        .note-author { text-align: right; font-weight: 800; color: var(--deep-blue); }
+        .note-pics { display: flex; gap: 10px; margin-top: 20px; border-top: 1px dashed #ddd; padding-top: 15px; }
+        .note-pics img { width: 45%; height: 80px; object-fit: cover; border-radius: 5px; }
+
+        footer { background: var(--deep-blue); color: white; padding: 80px 0; text-align: center; }
+        :root {
+            /* Đường cong Ease Out chuẩn GSAP Expo */
+            --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+            --ease-out-text: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* RESET CƠ BẢN */
+        body, html { margin: 0; padding: 0; }
+
+        /* --- 1. INTRO LOADER --- */
+        #intro-loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0a0a0a;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999;
+            transition: transform 1s var(--ease-out-expo);
+        }
+
+        #intro-text {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2rem, 10vw, 5rem);
+            color: white;
+            letter-spacing: 0.2em;
+            opacity: 0;
+            animation: introFade 1.4s var(--ease-out-expo) forwards;
+        }
+
+        @keyframes introFade {
+            0% { opacity: 0; letter-spacing: 0.5em; filter: blur(10px); }
+            40% { opacity: 1; letter-spacing: 0.2em; filter: blur(0); }
+            70% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.05); }
+        }
+
+        /* --- 2. HERO SECTION --- */
+        #hero-section {
+            height: 100vh;
+            width: 100%;
+            /* Thay URL ảnh của bạn ở đây */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white;
+            position: relative;
+        }
+
+        /* Container bao quanh các dòng để overflow:hidden */
+        .line-wrapper { overflow: hidden; display: block; }
+
+        /* Hiệu ứng nhô cả khối (Ease-out) */
+        .reveal-block {
+            display: block; opacity: 0;
+            transform: translateY(110%);
+            animation: slideUpBlock 1.2s var(--ease-out-text) forwards;
+        }
+
+        @keyframes slideUpBlock {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Style cho tiêu đề chính */
+        #class-title {
+            font-family: 'Merriweather', serif; 
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            margin: 15px 0;
+            display: flex; justify-content: center; flex-wrap: wrap;
+        }
+
+        /* Lớp bọc từng ký tự (Split-text) */
+        .char-wrapper { display: inline-block; overflow: hidden; vertical-align: bottom; }
+
+        /* Ký tự nhô lên */
+        .char {
+            display: inline-block;
+            transform: translateY(105%);
+            animation: charRise 1.4s var(--ease-out-text) forwards;
+        }
+
+        @keyframes charRise { to { transform: translateY(0); } }
+
+        /* Timing cho từng phần */
+        .welcome-msg { letter-spacing: 4px; font-weight: 300; animation-delay: 1.8s; }
+        .slogan-msg { letter-spacing: 8px; text-transform: uppercase; animation-delay: 3s; }
+
+    </style>
+</head>
+<body>
+    <!-- Màn hình Intro (A1-K7) -->
+    <div id="intro-loader">
+        <div style="font-family: JetBrains Mono;" id="intro-text">A1-K7</div>
+    </div>
+    <header id="main-header">
+        <nav class="nav-container">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> TRANG CHỦ
+            </a>
+            <ul class="nav-links">
+                <li><a href="#ban-can-su">Nhân Sự</a></li>
+                <li><a href="#thanh-tich">Bảng Vàng</a></li>
+                <li><a href="#dau-an">Dấu Ấn</a></li>
+                <li><a href="#loi-nhan">Nhắn Gửi</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- PHẦN 2: HERO TITLE & BACKGROUND -->
+    <section id="hero-section">
+        <div class="hero-content">
+            <span class="line-wrapper">
+                <p class="welcome-msg reveal-block">CHÀO MỪNG BẠN ĐẾN VỚI</p>
+            </span>
+            
+            <h1 id="class-title" style="font-family: JetBrains Mono;">A1-K7</h1>
+            
+            <span class="line-wrapper">
+                <p class="slogan-msg reveal-block">THPT DTNT Ngọc Lặc</p>
+            </span>
+        </div>
+    </section>
+
+    <div class="container">
+        
+        <!-- Bộ sậu -->
+        <section id="ban-can-su">
+            <div class="section-title">
+                <h2>Bộ Sậu Quyền Lực</h2>
+            </div>
+            <div class="team-grid">
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80" class="member-img">
+                    <div class="member-info">
+                        <p class="role">Lớp trưởng</p>
+                        <h3>Nguyễn Văn A</h3>
+                        <p class="desc">"Đầu tàu gương mẫu, chuyên gia ngoại giao và là người nắm giữ linh hồn của 12A1."</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&q=80" class="member-img">
+                    <div class="member-info">
+                        <p class="role">Lớp phó Học tập</p>
+                        <h3>Trần Thị B</h3>
+                        <p class="desc">"Bộ não siêu việt, người giữ gìn ngọn lửa tri thức và nỗi khiếp sợ của những bài kiểm tra khó."</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" class="member-img">
+                    <div class="member-info">
+                        <p class="role">Lớp phó Văn thể</p>
+                        <h3>Lê Văn C</h3>
+                        <p class="desc">"Nhà ảo thuật của mọi phong trào, biến sân bóng và sân khấu thành thánh đường của niềm vui."</p>
+                    </div>
+                </div>
+                <div class="member-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" class="member-img">
+                    <div class="member-info">
+                        <p class="role">Thủ quỹ</p>
+                        <h3>Phạm Thị D</h3>
+                        <p class="desc">"Tay hòm chìa khóa quyền năng, khắc tinh của nợ quỹ và là người giàu nhất lớp theo đúng nghĩa đen."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bảng vàng vinh danh -->
+        <section id="thanh-tich">
+            <div class="section-title">
+                <h2>Bảng Vàng Vinh Danh</h2>
+            </div>
+            
+            <div class="award-card">
+                <h3><i class="fa-solid fa-graduation-cap" style="color: #fbbf24; margin-right: 10px;"></i> Thành Tích Học Tập Xuất Sắc</h3>
+                <p>Nỗ lực không ngừng nghỉ, 12A1 tự hào dẫn đầu phong trào học tập toàn trường với tỷ lệ học sinh khá giỏi đạt 100%.</p>
+                <div class="award-images">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80">
+                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=600&q=80">
+                </div>
+            </div>
+
+            <div class="award-card">
+                <h3><i class="fa-solid fa-star" style="color: #fbbf24; margin-right: 10px;"></i> Giải Nhất Văn Nghệ & Bóng Chuyền</h3>
+                <p>Không chỉ học giỏi, chúng tớ còn là những nghệ sĩ trên sân khấu và những chiến binh quả cảm trên sân bóng chuyền.</p>
+                <div class="award-images">
+                    <img src="https://images.unsplash.com/photo-1514525253344-a812da997e32?auto=format&fit=crop&w=600&q=80">
+                    <img src="https://images.unsplash.com/photo-1592656091167-c11a7a1f6a4b?auto=format&fit=crop&w=600&q=80">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80">
+                </div>
+            </div>
+
+            <div class="award-card">
+                <h3><i class="fa-solid fa-trophy" style="color: #fbbf24; margin-right: 10px;"></i> Giải Nhất Học Sinh Giỏi Cấp Tỉnh</h3>
+                <p>Vinh quang thuộc về những cá nhân xuất sắc đã đem về những tấm huy chương vàng rạng danh cho tập thể 12A1.</p>
+                <div class="award-images">
+                    <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?auto=format&fit=crop&w=600&q=80">
+                    <img src="https://images.unsplash.com/photo-1491843351663-f95982f9b6b6?auto=format&fit=crop&w=600&q=80">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80">
+                </div>
+            </div>
+        </section>
+
+        <!-- Dấu ấn thời gian -->
+        <section id="dau-an">
+            <div class="section-title">
+                <h2>Dấu Ấn Thời Gian</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2023</div>
+                        <p>Gặp gỡ lần đầu dưới gốc phượng già, những bỡ ngỡ ban đầu nhanh chóng tan biến.</p>
+                        <div class="timeline-pics">
+                            <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=200&q=80">
+                            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=200&q=80">
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024</div>
+                        <p>Cháy hết mình trong hội trại truyền thống và chuyến dã ngoại đáng nhớ tại Pù Luông.</p>
+                        <div class="timeline-pics">
+                            <img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?auto=format&fit=crop&w=200&q=80">
+                            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=200&q=80">
+                            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=200&q=80">
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <p>Những đêm ôn thi miệt mài, cùng nhau hứa hẹn về một tương lai tươi sáng.</p>
+                        <div class="timeline-pics">
+                            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=200&q=80">
+                            <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=200&q=80">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lời nhắn -->
+        <section id="loi-nhan">
+            <div class="section-title">
+                <h2>Gửi 10 Năm Sau...</h2>
+            </div>
+            <div class="message-wall">
+                <div class="sticky-note">
+                    <p class="note-content">"Dù mai này mỗi đứa một nơi, hãy luôn nhớ về một 12A1 rực rỡ nhất trong lòng chúng ta. Hẹn gặp lại các bạn ở đỉnh vinh quang!"</p>
+                    <p class="note-author">— Lớp Trưởng</p>
+                    <div class="note-pics">
+                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=200&q=80">
+                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=200&q=80">
+                    </div>
+                </div>
+                <div class="sticky-note">
+                    <p class="note-content">"Áp lực hôm nay là động lực ngày mai. Chúc 12A1 cá chép hóa rồng, 100% đậu nguyện vọng 1 nhé!"</p>
+                    <p class="note-author">— Team Học Tập</p>
+                    <div class="note-pics">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=200&q=80">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=200&q=80">
+                    </div>
+                </div>
+                <div class="sticky-note">
+                    <p class="note-content">"Ngọc Lặc ơi, cảm ơn vì đã nuôi dưỡng những ước mơ nhỏ bé của chúng tớ thành hiện thực lớn lao."</p>
+                    <p class="note-author">— Một thành viên A1</p>
+                    <div class="note-pics">
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=200&q=80">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=200&q=80">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <h3>Lớp 12A1 - Khóa K7</h3>
+            <p>Trường THPT DTNT Ngọc Lặc - Thanh Hóa</p>
+            <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.5;">&copy; 2026. Một thời để nhớ.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hiệu ứng đổi màu Navbar khi cuộn
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        function initSplitText() {
+            const title = document.getElementById('class-title');
+            if (!title) return;
+
+            const text = title.innerText;
+            title.innerHTML = '';
+            
+            // Delay khởi điểm (chờ sau khi Intro kéo rèm xong)
+            const baseDelay = 2.1; 
+
+            const words = text.split(' ');
+            words.forEach((word, wordIdx) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.style.display = 'inline-block';
+                wordSpan.style.whiteSpace = 'nowrap';
+
+                [...word].forEach((char, charIdx) => {
+                    const charWrapper = document.createElement('span');
+                    charWrapper.classList.add('char-wrapper');
+
+                    const charSpan = document.createElement('span');
+                    charSpan.innerText = char;
+                    charSpan.classList.add('char');
+                    
+                    // Delay giữa các chữ cái cực ngắn (0.03s-0.04s) để tạo hiệu ứng lướt mượt
+                    charSpan.style.animationDelay = `${baseDelay + (wordIdx * 0.15) + (charIdx * 0.04)}s`;
+                    
+                    charWrapper.appendChild(charSpan);
+                    wordSpan.appendChild(charWrapper);
+                });
+
+                title.appendChild(wordSpan);
+
+                // Thêm khoảng trắng
+                if (wordIdx < words.length - 1) {
+                    const space = document.createElement('span');
+                    space.innerHTML = '&nbsp;';
+                    title.appendChild(space);
+                }
+            });
+        }
+
+        window.onload = function() {
+            const loader = document.getElementById('intro-loader');
+
+            // 1. Chuẩn bị tiêu đề
+            initSplitText();
+
+            // 2. Kết thúc Intro (Kéo rèm lên trên)
+            setTimeout(() => {
+                loader.style.transform = 'translateY(-100%)';
+                
+                // Dọn dẹp DOM sau khi animation kết thúc
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 1000);
+            }, 1400); // Intro hiển thị trong 1.4s
+        };        
+        /**
+         * Xử lý Split Text cho tiêu đề chính
+         */
+        function initHeroAnimation() {
+            const title = document.getElementById('class-title');
+            if (!title) return;
+
+            const text = title.innerText;
+            title.innerHTML = '';
+            
+            // Bắt đầu sau khi Intro biến mất (khoảng giây thứ 2.1)
+            const baseDelay = 2.1; 
+
+            const words = text.split(' ');
+            words.forEach((word, wordIdx) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.style.display = 'inline-block';
+                wordSpan.style.whiteSpace = 'nowrap';
+
+                [...word].forEach((char, charIdx) => {
+                    const charWrapper = document.createElement('span');
+                    charWrapper.classList.add('char-wrapper');
+
+                    const charSpan = document.createElement('span');
+                    charSpan.innerText = char;
+                    charSpan.classList.add('char');
+                    
+                    // Delay từng ký tự để tạo hiệu ứng lướt sóng Ease-out
+                    charSpan.style.animationDelay = `${baseDelay + (wordIdx * 0.2) + (charIdx * 0.04)}s`;
+                    
+                    charWrapper.appendChild(charSpan);
+                    wordSpan.appendChild(charWrapper);
+                });
+
+                title.appendChild(wordSpan);
+
+                // Thêm khoảng cách giữa các từ
+                if (wordIdx < words.length - 1) {
+                    const space = document.createElement('span');
+                    space.innerHTML = '&nbsp;';
+                    title.appendChild(space);
+                }
+            });
+        }
+
+        window.onload = function() {
+            const loader = document.getElementById('intro-loader');
+
+            // Khởi chạy logic tách chữ
+            initHeroAnimation();
+
+            // Kết thúc Intro sau 1.4s
+            setTimeout(() => {
+                loader.style.transform = 'translateY(-100%)';
+                
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 1000);
+            }, 1400);
+        };
+    </script>
+
+</body>
+</html>
