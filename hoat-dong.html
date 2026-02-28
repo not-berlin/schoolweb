@@ -174,7 +174,7 @@
         /* === CLB SECTION (Glass Cards tối) === */
         .clubs-section {
             padding: 100px 0; position: relative;
-            background: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            background: url('https://scontent.fhan3-2.fna.fbcdn.net/v/t39.30808-6/488548984_1237892511673572_7917362602858670501_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeFRQbhcSpjoONs9AKKmmCTKltx9jZsr5tiW3H2Nmyvm2FcXTksYJCQitSlU51QkXx7y3J4BY2Dx8OnT0bNg7leP&_nc_ohc=gcClW_XeZR0Q7kNvwFrZUW5&_nc_oc=Adn3tSp54gPhovDJj0k3mIggmKETuJtHZANNhctDwrLARYIUfRuL8TlLfMRPxg7BarnWeJpkfLYAUPLpsagc7ziR&_nc_zt=23&_nc_ht=scontent.fhan3-2.fna&_nc_gid=u49GUiA-cwPlfzHGktPp9w&_nc_ss=8&oh=00_AfsuadhGo2jOsJsrbFRR1gpQsjXEo4cxkRwIExTX-Z84Xg&oe=69A8C704') center/cover fixed;
         }
         .clubs-section::before {
             content: ''; position: absolute; inset: 0;
@@ -275,6 +275,53 @@
             .hero-content { padding: 30px 20px; backdrop-filter: blur(8px); }
             .gallery-item.large { grid-row: span 1; }
         }
+        /* Thiết lập khung hình toàn màn hình */
+        .hero-fullscreen {
+            position: relative;
+            height: 100vh; /* Phủ kín 100% chiều cao màn hình */
+            width: 100%;
+            background-image: url('photos/goibanhchung.jpg'); /* Thay link ảnh của trường vào đây */
+            background-size: cover; /* Ảnh phủ kín không bị hở */
+            background-position: center; /* Luôn lấy tâm ảnh làm chuẩn */
+            background-attachment: fixed; /* Tạo hiệu ứng cuộn nhẹ (Parallax) nếu thích */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Lớp phủ tối để nổi bật chữ - cảm xúc dạt dào hơn */
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(139, 21, 21, 0.6));
+            z-index: 1;
+        }
+
+        /* Nội dung nằm trên lớp phủ */
+        .hero-content-wrap {
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 8vw, 4.5rem); /* Tự co giãn kích thước chữ theo màn hình */
+            font-weight: 900;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            font-style: italic;
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -304,11 +351,12 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Nhịp đập DTNT Ngọc Lặc</h1>
-            <p>Nơi hội tụ tinh hoa văn hóa các dân tộc anh em vùng cao. Hơn cả một ngôi trường, đây là mái nhà chung ấm áp – nơi ươm mầm tri thức, rèn luyện kỹ năng tự lập và gắn kết những tâm hồn đồng điệu.</p>
+    <section class="hero-fullscreen">
+        <div class="hero-overlay"></div>
+        <div class="hero-content-wrap">
+            <h1 style="color: #FDFBF7;" class="hero-title">TRƯỜNG THPT DTNT NGỌC LẶC</h1>
+            <p class="hero-subtitle">Nơi lưu giữ hồn thiêng và khát vọng đại ngàn</p>
+            
         </div>
     </section>
 
@@ -400,7 +448,7 @@
         
         <div class="gallery-grid">
             <div class="gallery-item large reveal">
-                <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Giao lưu văn hóa dân tộc">
+                <img src="photos/spdt.png" alt="Giao lưu văn hóa dân tộc">
                 <div class="gallery-overlay">
                     <h3>Giao Lưu Văn Hóa</h3>
                     <p>Các nữ sinh thướt tha trong trang phục truyền thống Thái, Mường.</p>
@@ -439,10 +487,9 @@
 
     <!-- Footer -->
     <footer>
-        <div style="font-family: 'Merriweather', serif; font-size: 1.5rem; color: var(--color-gold); margin-bottom: 15px;">
-            <i class="fa-solid fa-yin-yang"></i> THPT DTNT Ngọc Lặc
+        <div style="font-family: 'Merriweather', serif; font-size: 1.5rem; color: var(--color-gold); margin-bottom: 15px;">THPT DTNT Ngọc Lặc
         </div>
-        <p>&copy; 2026 Trường THPT DTNT Ngọc Lặc. Nơi nuôi dưỡng trí tuệ - Bảo tồn bản sắc.</p>
+        <p>&copy; Thành Thuận Linh</p>
     </footer>
 
     <!-- JavaScript -->
