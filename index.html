@@ -90,9 +90,8 @@
             border: 1px solid rgba(255, 255, 255, 0);
             border-radius: 30px; padding: 600px 40px;
             max-width: 800px; width: 90%;
-            animation: fadeInUp 1s ease;
         }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        .hero h1 { margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
         .hero p { font-size: 1.2rem; font-weight: 300; margin-bottom: 30px; }
         .btn-cta {
             display: inline-block; padding: 15px 40px;
@@ -1125,6 +1124,31 @@
             margin-bottom: 30px;
         }
     }
+    /* Định nghĩa hiệu ứng từng chữ nhô lên */
+    .char-wrapper {
+        display: inline-block;
+        overflow: hidden; /* Giúp chữ 'nhô' lên từ hư không */
+        vertical-align: bottom;
+    }
+
+    .char {
+        display: inline-block;
+        transform: translateY(105%);
+        animation: charRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes charRise {
+        to { transform: translateY(0); }
+    }
+
+    /* Chỉnh lại style tiêu đề cho đẹp giống bản a1k7 */
+    #class-title {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0 12px; /* Khoảng cách giữa các từ */
+        font-family: 'Merriweather', serif; /* Font này mới giống bản a1k7 */
+    }
     </style>
 </head>
 <body>
@@ -1158,7 +1182,7 @@
         <div class="hero-overlay"></div>
 
         <div class="hero-glass-card">
-            <h1 style="color: #fff4f4;">TRƯỜNG THPT DTNT NGỌC LẶC</h1>
+            <h1 id="class-title" style="color: #fff4f4; font-family: Manrope;">TRƯỜNG THPT DTNT NGỌC LẶC</h1>
             <a href="#gioi-thieu" class="btn-cta">Tìm hiểu ngay</a>
         </div>
     </section>
@@ -1374,6 +1398,42 @@
             }, { threshold: 0.1 });
 
             revealElements.forEach(el => observer.observe(el));
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const title = document.getElementById('class-title');
+            if (!title) return;
+
+            const text = title.innerText;
+            title.innerHTML = '';
+            
+            const words = text.split(' ');
+            // baseDelay: thời gian chờ trước khi bắt đầu (ví dụ: 0.5 giây)
+            const baseDelay = 0.5; 
+
+            words.forEach((word, wordIdx) => {
+                const wordSpan = document.createElement('span');
+                wordSpan.style.display = 'inline-block';
+                wordSpan.style.whiteSpace = 'nowrap';
+
+                word.split('').forEach((char, charIdx) => {
+                    const charWrapper = document.createElement('span');
+                    charWrapper.className = 'char-wrapper';
+
+                    const charSpan = document.createElement('span');
+                    charSpan.innerText = char;
+                    charSpan.className = 'char';
+                    // Tạo độ trễ tăng dần để có hiệu ứng sóng
+                    charSpan.style.animationDelay = `${baseDelay + (wordIdx * 0.1) + (charIdx * 0.03)}s`;
+                    
+                    charWrapper.appendChild(charSpan);
+                    wordSpan.appendChild(charWrapper);
+                });
+
+                title.appendChild(wordSpan);
+                if (wordIdx < words.length - 1) {
+                    title.appendChild(document.createTextNode(' ')); // Thêm dấu cách
+                }
+            });
         });
     </script>
 </body>
