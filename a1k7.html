@@ -55,16 +55,6 @@
         
         header.scrolled .nav-links a, header.scrolled .back-link { color: var(--deep-blue) !important; }
 
-        /* === HERO (Toàn màn hình) === */
-        .hero-12a1 {
-            height: 100vh; width: 100%;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1523580494863-6f3031224b94?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-            background-attachment: fixed;
-            position: relative; color: white;
-            overflow: hidden;
-        }
         
         /* Hiệu ứng nhô lên cho tiêu đề */
         .hero-content .reveal-text {
@@ -236,14 +226,43 @@
         #hero-section {
             height: 100vh;
             width: 100%;
-            /* Thay URL ảnh của bạn ở đây */
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('photos/anhlop.jpg') center/cover no-repeat;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center; color: white;
             position: relative;
+            overflow: hidden; /* Bắt buộc để video không tràn ra ngoài */
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            text-align: center; 
+            color: white;
+            background: #000; /* Màu nền dự phòng khi video chưa load */
         }
 
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0; /* Cho nằm dưới cùng */
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        /* Lớp phủ để chữ A1-K7 nổi lên, không bị video làm mờ mắt */
+        #hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); 
+            z-index: 1; /* Nằm trên video, dưới chữ */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2; /* Nằm trên cùng */
+        }
         /* Container bao quanh các dòng để overflow:hidden */
         .line-wrapper { overflow: hidden; display: block; }
 
@@ -282,7 +301,7 @@
         /* Timing cho từng phần */
         .welcome-msg { letter-spacing: 4px; font-weight: 300; animation-delay: 1.8s; }
         .slogan-msg { letter-spacing: 8px; text-transform: uppercase; animation-delay: 3s; }
-
+        
     </style>
 </head>
 <body>
@@ -304,20 +323,22 @@
         </nav>
     </header>
 
-    <!-- PHẦN 2: HERO TITLE & BACKGROUND -->
-    <section id="hero-section">
-        <div class="hero-content">
-            <span class="line-wrapper">
-                <p class="welcome-msg reveal-block">CHÀO MỪNG BẠN ĐẾN VỚI</p>
-            </span>
-            
-            <h1 id="class-title" style="font-family: JetBrains Mono;">A1-K7</h1>
-            
-            <span class="line-wrapper">
-                <p class="slogan-msg reveal-block">THPT DTNT Ngọc Lặc</p>
-            </span>
-        </div>
-    </section>
+<section id="hero-section">
+    <video autoplay muted loop playsinline id="hero-video">
+        <source src="photos/a1k7.webm" type="video/webm">
+        <source src="photos/a1k7.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-content">
+        <span class="line-wrapper">
+            <p class="welcome-msg reveal-block">CHÀO MỪNG BẠN ĐẾN VỚI</p>
+        </span>
+        <h1 id="class-title" style="font-family: JetBrains Mono;">A1-K7</h1>
+        <span class="line-wrapper">
+            <p class="slogan-msg reveal-block">THPT DTNT Ngọc Lặc</p>
+        </span>
+    </div>
+</section>
 
     <div class="container">
         
@@ -372,9 +393,7 @@
                 <h3><i class="fa-solid fa-graduation-cap" style="color: #fbbf24; margin-right: 10px;"></i> Thành Tích Học Tập Xuất Sắc</h3>
                 <p>Nỗ lực không ngừng nghỉ, 12A1 tự hào dẫn đầu phong trào học tập toàn trường với tỷ lệ học sinh khá giỏi đạt 100%.</p>
                 <div class="award-images">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80">
-                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80">
-                    <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=600&q=80">
+                    <img src="photos/anhlop.jpg">
                 </div>
             </div>
 
@@ -382,19 +401,19 @@
                 <h3><i class="fa-solid fa-star" style="color: #fbbf24; margin-right: 10px;"></i> Giải Nhất Văn Nghệ & Bóng Chuyền</h3>
                 <p>Không chỉ học giỏi, chúng tớ còn là những nghệ sĩ trên sân khấu và những chiến binh quả cảm trên sân bóng chuyền.</p>
                 <div class="award-images">
-                    <img src="https://images.unsplash.com/photo-1514525253344-a812da997e32?auto=format&fit=crop&w=600&q=80">
-                    <img src="https://images.unsplash.com/photo-1592656091167-c11a7a1f6a4b?auto=format&fit=crop&w=600&q=80">
-                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80">
+                    <img src="https://scontent.fhan4-6.fna.fbcdn.net/v/t39.30808-6/480939437_1103498938211029_3754380818358378233_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=b895b5&_nc_eui2=AeGyKefcScl8CFxcpUzil33qyMWPWqTJ6y_IxY9apMnrL82d6jFg8WaOnrLGe8TqsYt6jhjCLoLzQGBB8X7tGsna&_nc_ohc=5Wigeox21jEQ7kNvwHhurE_&_nc_oc=AdkVIkhq_CdI3lo99OC79bcRXi0fAvVjgauLpDurKaA8nGkfWrrUovHKA1QiNaCoou8&_nc_zt=23&_nc_ht=scontent.fhan4-6.fna&_nc_gid=aTA_Pd_UPcdo7SMJiozGnQ&_nc_ss=8&oh=00_AfvwqDFgW7u6OjYeeZMd9MLEJjwMmr9C26ZtL7AaYkc60g&oe=69AA062E">
+                    <img src="https://scontent.fhan3-3.fna.fbcdn.net/v/t39.30808-6/585300166_805932472431428_4512527825145204194_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=2a1932&_nc_eui2=AeFPVCcvv1ns-3aF4mY0Ki0uT4jDxbXCuRZPiMPFtcK5FiraR95Pl-Ez4npeN3r0wAEImZNs8OxZjMtXIjErjUaO&_nc_ohc=OMWTDwrgkUkQ7kNvwG3whFP&_nc_oc=Adkgy6VkNHybUb9aWMH1hHIMGQjpcC89mYG1f4_yuTM7ssg5XfOtsJ9iqRStpA3Ro1o&_nc_zt=23&_nc_ht=scontent.fhan3-3.fna&_nc_gid=ZY46M4XtpJlH3xgH_KmEHA&_nc_ss=8&oh=00_Afvc00O0uyNI2vFB1ty0nlODZRMnwurqfQOMa0O3hDH24A&oe=69A9FC68">
+                    <img src="https://scontent.fhan4-1.fna.fbcdn.net/v/t39.30808-6/482237058_1108039497756973_1311954822883615546_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=b895b5&_nc_eui2=AeEr-UP2R7c2Z6gEwN5J0wtS5CSjZJ_2zQ7kJKNkn_bNDjPaiugzdSJjnA5L5VQ-UDueKkTNlRYCPM8CXWjTMqeM&_nc_ohc=atISxIYoBbUQ7kNvwEwMhOm&_nc_oc=Adn7lk3oAiGK5GRKZ9w-tKm3XftcWljBwW8k7aDQ-uJX1pI0hPAGLlmCa7X-kitUN3c&_nc_zt=23&_nc_ht=scontent.fhan4-1.fna&_nc_gid=QexuoZO7iexLVU8TUnHZbw&_nc_ss=8&oh=00_AftkwqSpWusev8LNoxFqJADIoYVRmXDEb1eiFPw11k_xLw&oe=69A9E3E1">
                 </div>
             </div>
 
             <div class="award-card">
-                <h3><i class="fa-solid fa-trophy" style="color: #fbbf24; margin-right: 10px;"></i> Giải Nhất Học Sinh Giỏi Cấp Tỉnh</h3>
-                <p>Vinh quang thuộc về những cá nhân xuất sắc đã đem về những tấm huy chương vàng rạng danh cho tập thể 12A1.</p>
+                <h3><i class="fa-solid fa-trophy" style="color: #fbbf24; margin-right: 10px;"></i> Giải Học Sinh Giỏi Cấp Tỉnh</h3>
+                <p>Vinh quang thuộc về những cá nhân xuất sắc đã đem về Giải nhất và Giải khuyến khích rạng danh cho tập thể 12A1.</p>
                 <div class="award-images">
-                    <img src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?auto=format&fit=crop&w=600&q=80">
-                    <img src="https://images.unsplash.com/photo-1491843351663-f95982f9b6b6?auto=format&fit=crop&w=600&q=80">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80">
+                    <img src="https://scontent.fhan3-1.fna.fbcdn.net/v/t39.30808-6/602447449_1339177628007872_3485441212663414135_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeG5jmI_pDiGCZjen9IUFb8Mz_MphIb600DP8ymEhvrTQF9Wu5b2UOPqPrJ3QKDP0WNWR3utaHZnwncaH9OSY51a&_nc_ohc=UMtjiIfke-0Q7kNvwEBBx3x&_nc_oc=Adm1aRFv3Y7vb-hW4JNY92FVlwN8Y4KRVuQl47H2-RZtofMett_zyPU_IlS7U1rbzMCura3EpCOkhgBxVXrPN9dK&_nc_zt=23&_nc_ht=scontent.fhan3-1.fna&_nc_gid=8GhlQEfVRx8U8qrZ4ArKWA&_nc_ss=8&oh=00_AfsaN1Bwd1X3vCX7iILW1_3p-jSjVNrM-LZR4q6Zk0qe2w&oe=69A9A0E3">
+                    <img src="https://scontent.fhan3-5.fna.fbcdn.net/v/t39.30808-6/598623462_122113293675079227_7890101481856902132_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHkv8K-VqWWQ5rO5rQazpGLyk1QI9Ay_5vKTVAj0DL_m__yjMbvyOwrBAd7Y-HCCnNvYU2QXUxA0v03bZXWljqO&_nc_ohc=r4svbwGTM84Q7kNvwHLmH4k&_nc_oc=Adn7Cbv4luPxcPDuUJVZztuIT1Nmitf668Cq7q544jbxpmTdN2MeUV0y_GBcxwCklpBopXCfjhaFv2YCeQyujSeB&_nc_zt=23&_nc_ht=scontent.fhan3-5.fna&_nc_gid=Y8tQNzjM8Qxnzqpxj1eyRA&_nc_ss=8&oh=00_Afuo5wOeEOWeGfD_cnGaxiYF8vExW2gsILCrr-u7zu1Kag&oe=69A998E5">
+                    <img src="photos/dttdtt.jpg">
                 </div>
             </div>
         </section>
@@ -410,19 +429,19 @@
                         <div class="timeline-year">2023</div>
                         <p>Gặp gỡ lần đầu dưới gốc phượng già, những bỡ ngỡ ban đầu nhanh chóng tan biến.</p>
                         <div class="timeline-pics">
-                            <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=200&q=80">
-                            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=200&q=80">
+                            <img src="photos/ktd.jpg">
+                            <img src="photos/bo3cho.jpg">
                         </div>
                     </div>
                 </div>
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <div class="timeline-year">2024</div>
-                        <p>Cháy hết mình trong hội trại truyền thống và chuyến dã ngoại đáng nhớ tại Pù Luông.</p>
+                        <p>Cháy hết mình tạo nên những kỉ niệm đáng nhớ tại Hội chợ xuân.</p>
                         <div class="timeline-pics">
-                            <img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?auto=format&fit=crop&w=200&q=80">
-                            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=200&q=80">
-                            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=200&q=80">
+                            <img src="photos/hoichoxuan1.JPG">
+                            <img src="photos/hoichoxuan.jpg">
+                            <img src="photos/hoichoxuan2.jpg">
                         </div>
                     </div>
                 </div>
@@ -431,8 +450,7 @@
                         <div class="timeline-year">2025</div>
                         <p>Những đêm ôn thi miệt mài, cùng nhau hứa hẹn về một tương lai tươi sáng.</p>
                         <div class="timeline-pics">
-                            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=200&q=80">
-                            <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=200&q=80">
+                            <img src="photos/hoctap.jpg">
                         </div>
                     </div>
                 </div>
@@ -449,24 +467,24 @@
                     <p class="note-content">"Dù mai này mỗi đứa một nơi, hãy luôn nhớ về một 12A1 rực rỡ nhất trong lòng chúng ta. Hẹn gặp lại các bạn ở đỉnh vinh quang!"</p>
                     <p class="note-author">— Lớp Trưởng</p>
                     <div class="note-pics">
-                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=200&q=80">
-                        <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=200&q=80">
+                        <img src="photos/anh1.JPG">
+                        <img src="photos/anh2.JPG">
                     </div>
                 </div>
                 <div class="sticky-note">
                     <p class="note-content">"Áp lực hôm nay là động lực ngày mai. Chúc 12A1 cá chép hóa rồng, 100% đậu nguyện vọng 1 nhé!"</p>
                     <p class="note-author">— Team Học Tập</p>
                     <div class="note-pics">
-                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=200&q=80">
-                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=200&q=80">
+                        <img src="photos/anh3.JPG">
+                        <img src="photos/anh4.JPG">
                     </div>
                 </div>
                 <div class="sticky-note">
                     <p class="note-content">"Ngọc Lặc ơi, cảm ơn vì đã nuôi dưỡng những ước mơ nhỏ bé của chúng tớ thành hiện thực lớn lao."</p>
                     <p class="note-author">— Một thành viên A1</p>
                     <div class="note-pics">
-                        <img src="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=200&q=80">
-                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=200&q=80">
+                        <img src="photos/anh5.JPG">
+                        <img src="photos/anh6.JPG">
                     </div>
                 </div>
             </div>
@@ -483,7 +501,7 @@
     </footer>
 
     <script>
-        // Hiệu ứng đổi màu Navbar khi cuộn
+        // 1. Hiệu ứng đổi màu Navbar khi cuộn
         window.addEventListener('scroll', () => {
             const header = document.getElementById('main-header');
             if (window.scrollY > 100) {
@@ -492,76 +510,15 @@
                 header.classList.remove('scrolled');
             }
         });
-        function initSplitText() {
-            const title = document.getElementById('class-title');
-            if (!title) return;
 
-            const text = title.innerText;
-            title.innerHTML = '';
-            
-            // Delay khởi điểm (chờ sau khi Intro kéo rèm xong)
-            const baseDelay = 2.1; 
-
-            const words = text.split(' ');
-            words.forEach((word, wordIdx) => {
-                const wordSpan = document.createElement('span');
-                wordSpan.style.display = 'inline-block';
-                wordSpan.style.whiteSpace = 'nowrap';
-
-                [...word].forEach((char, charIdx) => {
-                    const charWrapper = document.createElement('span');
-                    charWrapper.classList.add('char-wrapper');
-
-                    const charSpan = document.createElement('span');
-                    charSpan.innerText = char;
-                    charSpan.classList.add('char');
-                    
-                    // Delay giữa các chữ cái cực ngắn (0.03s-0.04s) để tạo hiệu ứng lướt mượt
-                    charSpan.style.animationDelay = `${baseDelay + (wordIdx * 0.15) + (charIdx * 0.04)}s`;
-                    
-                    charWrapper.appendChild(charSpan);
-                    wordSpan.appendChild(charWrapper);
-                });
-
-                title.appendChild(wordSpan);
-
-                // Thêm khoảng trắng
-                if (wordIdx < words.length - 1) {
-                    const space = document.createElement('span');
-                    space.innerHTML = '&nbsp;';
-                    title.appendChild(space);
-                }
-            });
-        }
-
-        window.onload = function() {
-            const loader = document.getElementById('intro-loader');
-
-            // 1. Chuẩn bị tiêu đề
-            initSplitText();
-
-            // 2. Kết thúc Intro (Kéo rèm lên trên)
-            setTimeout(() => {
-                loader.style.transform = 'translateY(-100%)';
-                
-                // Dọn dẹp DOM sau khi animation kết thúc
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 1000);
-            }, 1400); // Intro hiển thị trong 1.4s
-        };        
-        /**
-         * Xử lý Split Text cho tiêu đề chính
-         */
+        // 2. Logic tách chữ để chạy hiệu ứng lướt sóng cho A1-K7
         function initHeroAnimation() {
             const title = document.getElementById('class-title');
             if (!title) return;
 
             const text = title.innerText;
             title.innerHTML = '';
-            
-            // Bắt đầu sau khi Intro biến mất (khoảng giây thứ 2.1)
-            const baseDelay = 2.1; 
+            const baseDelay = 2.1; // Bắt đầu sau khi Intro kéo màn xong
 
             const words = text.split(' ');
             words.forEach((word, wordIdx) => {
@@ -576,17 +533,13 @@
                     const charSpan = document.createElement('span');
                     charSpan.innerText = char;
                     charSpan.classList.add('char');
-                    
-                    // Delay từng ký tự để tạo hiệu ứng lướt sóng Ease-out
+                    // Tính toán delay để tạo hiệu ứng mượt mà
                     charSpan.style.animationDelay = `${baseDelay + (wordIdx * 0.2) + (charIdx * 0.04)}s`;
                     
                     charWrapper.appendChild(charSpan);
                     wordSpan.appendChild(charWrapper);
                 });
-
                 title.appendChild(wordSpan);
-
-                // Thêm khoảng cách giữa các từ
                 if (wordIdx < words.length - 1) {
                     const space = document.createElement('span');
                     space.innerHTML = '&nbsp;';
@@ -595,16 +548,16 @@
             });
         }
 
+        // 3. CHỈ DÙNG 1 HÀM ONLOAD DUY NHẤT
         window.onload = function() {
             const loader = document.getElementById('intro-loader');
 
-            // Khởi chạy logic tách chữ
+            // Chạy animation chữ
             initHeroAnimation();
 
-            // Kết thúc Intro sau 1.4s
+            // Sau 1.4 giây thì kéo rèm Intro lên
             setTimeout(() => {
                 loader.style.transform = 'translateY(-100%)';
-                
                 setTimeout(() => {
                     loader.style.display = 'none';
                 }, 1000);
